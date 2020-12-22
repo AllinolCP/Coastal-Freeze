@@ -34,20 +34,18 @@ jobs:
             ls ~/repo/out/make
       - store_artifacts:
           path: ~/repo/out/make
-      - store_artifacts:
-          path: ./artifacts/
 
   release:
     docker:
       - image: cibuilds/github:0.10
     steps:
     - attach_workspace:
-        at:  ./artifacts/
+        at:  ~/repo/out/make
     - run:
         name: "Publish Release on GitHub"
         command: |
           VERSION=v1.0.0
-          ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
+          ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} zip/
 workflows:
   version: 2.1
   
