@@ -60,7 +60,11 @@
    "author":"GitHub",
    "license":"CC0-1.0",
    "devDependencies":{
-      "@electron-forge":"^6.0.0-beta.54",
+      "@electron-forge/cli":"^6.0.0-beta.54",
+      "@electron-forge/maker-zip":"^6.0.0-beta.54",
+      "@electron-forge/maker-wix":"^6.0.0-beta.54",
+      "@electron-forge/maker-deb":"^6.0.0-beta.54",
+      "@electron-forge/maker-dmg":"^6.0.0-beta.54",
       "electron":"^8.1.1",
       "electron-packager":"^12.1.2"
    },
