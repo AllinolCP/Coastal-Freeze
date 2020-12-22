@@ -1,66 +1,70 @@
 {
-  "name": "Coastal-Freeze",
-  "version": "1.0.0",
-  "description": "Coastal-Freeze",
-  "productName": "Coastal Freeze",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "build-win": "npx @electron-forge/cli make --platform win32",
-    "build-mac": "npx @electron-forge/cli make --platform darwin",
-    "build-linux": "npx @electron-forge/cli make --platform linux"
-  },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-	"config": {
-	  "forge": {
-		"packagerConfig": {"icon": "./favicon.ico"},
-		"makers": [
-		  {
-			"name": "@electron-forge/maker-zip",
-			"platforms": ["linux", "darwin","win32"]
-		  },
-		  {
-			  name: '@electron-forge/maker-wix',
-			  config: {
-			    language: 1033,
-			    manufacturer: 'Coastal Freeze'
-			  }
-		  },
-			
-			{
-			  name: '@electron-forge/maker-deb',
-			  config: {
-			    options: {
-			      maintainer: 'Coastal Freeze',
-			      homepage: 'https://coastalfreeze.net'
-			    }
-			  }
-			},
-			
-		{
-			  name: '@electron-forge/maker-dmg',
-			  config: {
-			    format: 'ULFO'
-			  }
-			}
-		]
-	  }
-	},
-  "author": "GitHub",
-  "license": "CC0-1.0",
-  "devDependencies": {
-    "@electron-forge": "^6.0.0-beta.54",
-    "electron": "^8.1.1",
-    "electron-packager": "^12.1.2"
-  },
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+   "name":"Coastal-Freeze",
+   "version":"1.0.0",
+   "description":"Coastal-Freeze",
+   "productName":"Coastal Freeze",
+   "main":"main.js",
+   "scripts":{
+      "start":"electron .",
+      "build-win":"npx @electron-forge/cli make --platform win32",
+      "build-mac":"npx @electron-forge/cli make --platform darwin",
+      "build-linux":"npx @electron-forge/cli make --platform linux"
+   },
+   "repository":"https://github.com/electron/electron-quick-start",
+   "keywords":[
+      "Electron",
+      "quick",
+      "start",
+      "tutorial",
+      "demo"
+   ],
+   "config":{
+      "forge":{
+         "packagerConfig":{
+            "icon":"./favicon.ico"
+         },
+         "makers":[
+            {
+               "name":"@electron-forge/maker-zip",
+               "platforms":[
+                  "linux",
+                  "darwin",
+                  "win32"
+               ]
+            },
+            {
+               "name":"@electron-forge/maker-wix",
+               "config":{
+                  "language":1033,
+                  "manufacturer":"Coastal Freeze"
+               }
+            },
+            {
+               "name":"@electron-forge/maker-deb",
+               "config":{
+                  "options":{
+                     "maintainer":"Coastal Freeze",
+                     "homepage":"https://coastalfreeze.net"
+                  }
+               }
+            },
+            {
+               "name":"@electron-forge/maker-dmg",
+               "config":{
+                  "format":"ULFO"
+               }
+            }
+         ]
+      }
+   },
+   "author":"GitHub",
+   "license":"CC0-1.0",
+   "devDependencies":{
+      "@electron-forge":"^6.0.0-beta.54",
+      "electron":"^8.1.1",
+      "electron-packager":"^12.1.2"
+   },
+   "dependencies":{
+      "express":"^4.17.1"
+   }
 }
