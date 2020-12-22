@@ -38,9 +38,7 @@ jobs:
       - run:
           name: Generating Binaries
           command: |
-            npm run build-mac
-            npm run build-win
-            npm run build-linux
+            npm run build-mac & npm run build-win & npm run build-linux
       - persist_to_workspace:
           root: out
           paths: make
