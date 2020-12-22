@@ -40,7 +40,7 @@ jobs:
       - image: cibuilds/github:0.10
     steps:
     - attach_workspace:
-        at:  ~/repo/out/make
+        at:  /home/circleci/repo/out/make
     - run:
         name: "Publish Release on GitHub"
         command: |
