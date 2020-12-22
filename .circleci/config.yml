@@ -1,50 +1,57 @@
+workflows:
+
 version: 2.1
-jobs:
-  build:
-    working_directory: ~/repo
-    docker:
-      - image: circleci/node:11
-    docker:
-      - image: cibuilds/github:0.10
-    steps:
-      - checkout
-      - run:
-          name: Update NPM
-          command: "sudo npm install -g npm"
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Install Dependencies
-          command: npm install
-      - run:
-          name: Install dpkg and fakeroot
-          command: |
-            sudo apt-get update -y
-            sudo apt-get install -y dpkg fakeroot wine64
+    build_binary:
+        jobs:
+          build:
+            working_directory: ~/repo
+            docker:
+              - image: circleci/node:11
+            steps:
+              - checkout
+              - run:
+                  name: Update NPM
+                  command: "sudo npm install -g npm"
+              - restore_cache:
+                  key: dependency-cache-{{ checksum "package.json" }}
+              - run:
+                  name: Install Dependencies
+                  command: npm install
+              - run:
+                  name: Install dpkg and fakeroot
+                  command: |
+                    sudo apt-get update -y
+                    sudo apt-get install -y dpkg fakeroot wine64
 
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
-      - run:
-          name: Generate Mac Binaries
-          command: npm run build-mac
+              - save_cache:
+                  key: dependency-cache-{{ checksum "package.json" }}
+                  paths:
+                    - ./node_modules
+              - run:
+                  name: Generate Mac Binaries
+                  command: npm run build-mac
 
-      - run:
-          name: Generating Windows Binaries
-          command: npm run build-win
+              - run:
+                  name: Generating Windows Binaries
+                  command: npm run build-win
 
-      - run:
-          name: Generating Linux Binaries
-          command: npm run build-linux
+              - run:
+                  name: Generating Linux Binaries
+                  command: npm run build-linux
 
-      - store_artifacts:
-          path: ~/repo/out/make
-          
-      - attach_workspace:
-          at: ./artifacts
-      - run:
-          name: "Publish Release on GitHub"
-          command: |
-            VERSION=1.0.0
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
+              - store_artifacts:
+                  path: ~/repo/out/make
+                  
+    publish:
+        jobs:
+            publish-github-release:
+                docker:
+                  - image: cibuilds/github:0.10
+                steps:
+                  - attach_workspace:
+                      at: ./artifacts
+                  - run:
+                      name: "Publish Release on GitHub"
+                      command: |
+                        VERSION=$(my-binary --version)
+                        ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
