@@ -48,7 +48,7 @@ jobs:
           path: ~/repo/out/make
 
   release:
-    executor: my-executor
+    executor: cf-executor
     working_directory: ~/repo
     docker:
       - image: cibuilds/github:0.10
