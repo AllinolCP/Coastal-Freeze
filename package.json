@@ -20,7 +20,7 @@
   ],
 	"config": {
 	  "forge": {
-		"packagerConfig": {},
+		"packagerConfig": {"icon": "./favicon.ico"},
 		"makers": [
 		  {
 			"name": "@electron-forge/maker-zip",
