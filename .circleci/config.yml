@@ -33,7 +33,8 @@ jobs:
 
       - store_artifacts:
           path: ~/repo/out/make
-          
+
+jobs:
   publish-github-release:
     docker:
       - image: circleci/golang:1.8
