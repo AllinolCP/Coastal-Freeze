@@ -1,0 +1,42 @@
+{
+  "name": "Coastal-Freeze",
+  "version": "1.0.0",
+  "description": "Coastal-Freeze",
+  "productName": "Coastal Freeze",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build-win": "electron-packager . Coastal-Freeze-C --overwrite --platform=win32 --arch=ia32 --icon=favicon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"CoastalFreeze\"",
+    "build-mac": "npx @electron-forge/cli make --platform darwin",
+    "build-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=favicon.ico --prune=true --out=release-builds"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+	"config": {
+	  "forge": {
+		"packagerConfig": {},
+		"makers": [
+		  {
+			"name": "@electron-forge/maker-zip",
+			"platforms": ["linux", "darwin","win32"]
+		  }
+		]
+	  }
+	},
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "electron": "^8.1.1",
+    "electron-packager": "^12.1.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
