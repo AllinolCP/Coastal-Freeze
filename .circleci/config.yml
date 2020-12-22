@@ -36,8 +36,6 @@ jobs:
 
   release:
     working_directory: ~/repo
-    requires:
-      - build
     docker:
       - image: cibuilds/github:0.10
     steps:
@@ -55,5 +53,7 @@ workflows:
   
   cf_build:
     jobs:
-      - release
+      - release:
+          requires:
+            - build
       - build
