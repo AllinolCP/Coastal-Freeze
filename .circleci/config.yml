@@ -4,6 +4,7 @@ jobs:
     working_directory: ~/repo
     docker:
       - image: circleci/node:11
+      - image: circleci/golang:1.8
     steps:
       - checkout
       - run:
@@ -38,10 +39,7 @@ jobs:
 
       - store_artifacts:
           path: ~/repo/out/make
-  publish-github-release:
-    docker:
-      - image: cibuilds/github:0.10
-    steps:
+          
       - attach_workspace:
           at: ./artifacts
       - run:
