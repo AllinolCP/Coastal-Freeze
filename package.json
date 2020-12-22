@@ -6,9 +6,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build-win": "electron-packager . Coastal-Freeze-C --overwrite --platform=win32 --arch=ia32 --icon=favicon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"CoastalFreeze\"",
+    "build-win": "npx @electron-forge/cli make --platform win32",
     "build-mac": "npx @electron-forge/cli make --platform darwin",
-    "build-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=favicon.ico --prune=true --out=release-builds"
+    "build-linux": "npx @electron-forge/cli make --platform linux"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
