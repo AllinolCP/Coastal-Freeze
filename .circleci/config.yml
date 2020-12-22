@@ -51,5 +51,6 @@ workflows:
   version: 2.1
   
   cf_build:
-    - build
-    - release
+    jobs:
+      - build
+      - release
