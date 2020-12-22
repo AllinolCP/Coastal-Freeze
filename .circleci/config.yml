@@ -25,20 +25,27 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          name: Generate Builds
+          name: Generate Mac Binaries
           command: npm run build-mac
+
+      - run:
+          name: Generating Windows Binaries
+          command: npm run build-win
+
+      - run:
+          name: Generating Linux Binaries
+          command: npm run build-linux
 
       - store_artifacts:
           path: ~/repo/out/make
   publish-github-release:
     docker:
-      - image: circleci/golang:1.8
+      - image: cibuilds/github:0.10
     steps:
       - attach_workspace:
           at: ./artifacts
       - run:
           name: "Publish Release on GitHub"
           command: |
-            go get github.com/tcnksm/ghr
             VERSION=$(my-binary --version)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
