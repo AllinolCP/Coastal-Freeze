@@ -52,6 +52,3 @@ workflows:
   cf_build:
     jobs:
       - build
-      - release:
-          requires:
-            - build
