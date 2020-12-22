@@ -44,7 +44,7 @@ jobs:
             ls ~/repo/out/make
       - persist_to_workspace:
           root: out
-          paths: make
+          paths: make/zip
       - store_artifacts:
           path: ~/repo/out/make
 
@@ -60,7 +60,7 @@ jobs:
           name: "Publish Release on GitHub"
           command: |
             ls ~/repo/out/make
-            VERSION=1.0.0
+            VERSION=.zip
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ~/repo/out/make/zip
 
 workflows:
@@ -68,7 +68,7 @@ workflows:
   
   cf_build:
     jobs:
+      - build
       - release:
           requires:
             - build
-      - build
