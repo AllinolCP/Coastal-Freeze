@@ -47,12 +47,6 @@
                      "homepage":"https://coastalfreeze.net"
                   }
                }
-            },
-            {
-               "name":"@electron-forge/maker-dmg",
-               "config":{
-                  "format":"ULFO"
-               }
             }
          ]
       }
