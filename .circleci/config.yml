@@ -33,33 +33,27 @@ jobs:
             npm run build-win 
             npm run build-linux
             ls ~/repo/out/make
-      - github-release/create:
-          tag: v1.0.0
-          title: Version v1.0.0
-          description: version v1.0.0.
-          file-path: ~/repo/out/make/zip
       - store_artifacts:
           path: ~/repo/out/make
 
   release:
     working_directory: ~/repo
     docker:
-      - image: cibuilds/github:0.10
+      - image: circleci/golang:1.8
     steps:
     - attach_workspace:
         at:  ~/repo/out/make
-    - run:
-        name: "Publish Release on GitHub"
-        command: |
-          ls ~/repo/out/make/zip/
-          VERSION=1.0.0
-          ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ~/repo/out/make/zip/
+    - github-release/create:
+        tag: v1.0.0
+        title: Version v1.0.0
+        description: version v1.0.0.
+        file-path: ~/repo/out/make/zip
 workflows:
   version: 2.1
   
   cf_build:
     jobs:
       - build
-      #- release:
-          #requires:
-           # - build
+      - release:
+          requires:
+            - build
