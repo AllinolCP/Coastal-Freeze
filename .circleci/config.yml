@@ -1,17 +1,7 @@
 version: 2.1
 
-executors:
-  cf-executor:
-    docker:
-      - image: buildpack-deps:jessie
-        auth:
-          username: docker123
-          password: 123docker # context / project UI env-var reference
-    working_directory: ~/repo
-
 jobs:
   build:
-    executor: cf-executor
     working_directory: ~/repo
     docker:
       - image: circleci/node:11
@@ -42,27 +32,20 @@ jobs:
             npm run build-win 
             npm run build-linux
             ls ~/repo/out/make
-      - persist_to_workspace:
-          root: out
-          paths: make/zip
       - store_artifacts:
           path: ~/repo/out/make
 
   release:
-    executor: cf-executor
-    working_directory: ~/repo
     docker:
       - image: cibuilds/github:0.10
     steps:
-      - attach_workspace:
-          at: ~/repo/out/make
-      - run:
-          name: "Publish Release on GitHub"
-          command: |
-            ls ~/repo/out/make
-            VERSION=.zip
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ~/repo/out/make/zip
-
+    - attach_workspace:
+        at: ./artifacts
+    - run:
+        name: "Publish Release on GitHub"
+        command: |
+          VERSION=coastal
+          ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
 workflows:
   version: 2.1
   
