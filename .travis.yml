@@ -4,7 +4,7 @@ os:
 - linux
 - osx
 - windows
-dist: trusty
+dist: trusty 
 osx_image: xcode8.3
 sudo: false
 
@@ -35,6 +35,7 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+    
 branches:
   only:
     - /v\d+\.\d+.\d+/
