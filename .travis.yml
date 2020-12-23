@@ -31,7 +31,7 @@ deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
   file_glob: true
-  file: ./*.zip
+  file: /home/travis/build/AllinolCP/Coastal-Freeze/**/*.zip
   skip_cleanup: true
   on:
-    tags: false
+    tags: true
