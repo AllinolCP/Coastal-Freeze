@@ -42,6 +42,9 @@ app.on('ready', () => {
     Menu.setApplicationMenu(fsmenu);
 })
 
+var aboutMessage = `This standalone client for Coastal Freeze was made by Allinol & Random.
+					it was made to not let Flash die forever by the end of December 2020`
+
 function makeMenu() { // credits to random
     fsmenu = new Menu();
     if (process.platform == 'darwin') {
@@ -53,7 +56,7 @@ function makeMenu() { // credits to random
                         dialog.showMessageBox({
                             type: "info",
                             buttons: ["Ok"],
-                            title: "About Coastal Freeze DLC",
+                            title: "About Coastal Freeze",
                             message: aboutMessage
                         });
                     }
@@ -62,15 +65,13 @@ function makeMenu() { // credits to random
                     label: 'Fullscreen (Toggle)',
                     accelerator: 'CmdOrCtrl+F',
                     click: () => {
-                        let fsbool = (win.isFullScreen() ? false : true);
-                        win.setFullScreen(fsbool);
+                        win.setFullScreen(!win.isFullScreen());
                     }
                 },
                 {
                     label: 'Mute Audio (Toggle)',
                     click: () => {
-                        let ambool = (win.webContents.audioMuted ? false : true);
-                        win.webContents.audioMuted = ambool;
+                        win.webContents.audioMuted = !win.webContents.audioMuted;;
                     }
                 },
                 {
@@ -90,7 +91,7 @@ function makeMenu() { // credits to random
                 dialog.showMessageBox({
                     type: "info",
                     buttons: ["Ok"],
-                    title: "About Coastal Freeze DLC",
+                    title: "About Coastal Freeze",
                     message: aboutMessage
                 });
             }
@@ -99,15 +100,13 @@ function makeMenu() { // credits to random
             label: 'Fullscreen (Toggle)',
             accelerator: 'CmdOrCtrl+F',
             click: () => {
-                let fsbool = (win.isFullScreen() ? false : true);
-                win.setFullScreen(fsbool);
+                win.setFullScreen(!win.isFullScreen());
             }
         }));
         fsmenu.append(new MenuItem({
             label: 'Mute Audio (Toggle)',
             click: () => {
-                let ambool = (win.webContents.audioMuted ? false : true);
-                win.webContents.audioMuted = ambool;
+                win.webContents.audioMuted = !win.webContents.audioMuted;
             }
         }));
         fsmenu.append(new MenuItem({
@@ -118,6 +117,11 @@ function makeMenu() { // credits to random
             }
         }));
     }
+}
+function clearCache(){
+	windows = BrowserWindow.getAllWindows()[0];
+	const ses = win.webContents.session;
+	ses.clearCache(() => {});
 }
 
 app.on('window-all-closed', () => {
