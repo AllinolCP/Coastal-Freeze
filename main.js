@@ -3,14 +3,14 @@ const {
     dialog,
     BrowserWindow,
     Menu,
-    MenuItem
+    MenuItem,
+	ipcMain
 } = require('electron')
+
+const { autoUpdater } = require('electron-updater');
+
 const path = require('path')
-const express = require('express');
-const server = express();
 
-
-if (require('electron-squirrel-startup')) return app.quit();
 
 let pluginName
 switch (process.platform) {
@@ -38,11 +38,15 @@ app.on('ready', () => {
     win = new BrowserWindow({
 		title: "Coastal Freeze",
         webPreferences: {
-            plugins: true
+            plugins: true,
+			nodeIntegration: true
         }
     })
 	makeMenu()
-    win.loadFile('index.html')
+    win.loadFile('index.html');
+	
+	autoUpdater.checkForUpdatesAndNotify();
+	
     Menu.setApplicationMenu(fsmenu);
 })
 
@@ -128,6 +132,21 @@ function clearCache(){
 	ses.clearCache(() => {});
 }
 
+// Auto update part
+
+autoUpdater.on('update-available', () => {
+  win.webContents.send('update_available');
+});
+
+
+// end of Auto update part
+
+ipcMain.on('app_version', (event) => {
+  event.sender.send('app_version', { version: app.getVersion() });
+});
+
 app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
     app.quit();
+  }
 });

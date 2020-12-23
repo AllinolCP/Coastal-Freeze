@@ -1,35 +1,35 @@
 {
-   "name":"Coastal-Freeze",
-   "version":"1.1.14",
-   "description":"Coastal Freeze Client",
-   "productName":"CF",
-   "main":"main.js",
-   "scripts":{
-      "start":"electron .",
-      "make":"npx @electron-forge/cli make --arch=ia32",
-      "make-mac":"npx @electron-forge/cli make",
-      "publish":"electron-forge publish"
+   "name": "Coastal-Freeze",
+   "version": "1.0.3",
+   "description": "Coastal Freeze Client",
+   "productName": "CF",
+   "main": "main.js",
+   "scripts": {
+      "start": "electron .",
+      "make": "npx @electron-forge/cli make --arch=ia32",
+      "make-mac": "npx @electron-forge/cli make",
+      "publish": "electron-forge publish"
    },
-   "repository":"https://github.com/AllinolCP/Coastal-Freeze",
-   "keywords":[
+   "repository": "https://github.com/AllinolCP/Coastal-Freeze",
+   "keywords": [
       "coastal",
-	  "freeze",
-	  "club penguin",
-	  "cpr"
+      "freeze",
+      "club penguin",
+      "cpr"
    ],
-   "config":{
-      "forge":{
-         "packagerConfig":{
-            "icon":"./favicon.ico"
+   "config": {
+      "forge": {
+         "packagerConfig": {
+            "icon": "./favicon.ico"
          },
-         "github_repository":{
-            "owner":"AllinolCP",
-            "name":"Coastal-Freeze"
+         "github_repository": {
+            "owner": "AllinolCP",
+            "name": "Coastal-Freeze"
          },
-         "makers":[
+         "makers": [
             {
-               "name":"@electron-forge/maker-zip",
-               "platforms":[
+               "name": "@electron-forge/maker-zip",
+               "platforms": [
                   "linux",
                   "darwin",
                   "win32"
@@ -38,14 +38,16 @@
          ]
       }
    },
-   "author":"GitHub",
-   "license":"CC0-1.0",
-   "devDependencies":{
-      "@electron-forge/cli":"^6.0.0-beta.54",
-      "@electron-forge/maker-zip":"^6.0.0-beta.54",
-      "@electron-forge/maker-deb":"^6.0.0-beta.54",
-      "@electron-forge/maker-wix":"^6.0.0-beta.54",
-      "electron":"^8.1.1"
+   "author": "GitHub",
+   "license": "CC0-1.0",
+   "devDependencies": {
+      "@electron-forge/cli": "^6.0.0-beta.54",
+      "@electron-forge/maker-zip": "^6.0.0-beta.54",
+      "@electron-forge/maker-deb": "^6.0.0-beta.54",
+      "@electron-forge/maker-wix": "^6.0.0-beta.54",
+      "electron": "^8.1.1"
    },
-   "dependencies":{}
+   "dependencies": {
+      "electron-updater": "^4.3.5"
+   }
 }
