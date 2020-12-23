@@ -1,4 +1,4 @@
-const {app, BrowserWindow, Menu} = require('electron')
+const {app, dialog, BrowserWindow, Menu, MenuItem} = require('electron')
 const path = require('path')
 const express = require('express');
 const server = express();
