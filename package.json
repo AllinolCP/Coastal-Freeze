@@ -19,6 +19,10 @@
 	"config": {
 	  "forge": {
 		"packagerConfig": {"icon": "./favicon.ico"},
+		"github_repository": {
+		  "owner": "AllinolCP",
+		  "name": "Coastal-Freeze"
+	        },
 		"makers": [
 		  {
 			"name": "@electron-forge/maker-zip",
