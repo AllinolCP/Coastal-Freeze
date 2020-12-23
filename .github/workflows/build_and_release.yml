@@ -22,16 +22,15 @@ jobs:
         with:
           node-version: 11
 
+
+      - name: install Dependencies
+        run: npm install
+
       - name: Compiling (macOS)
         if: matrix.os == 'macos-latest'
-        run: | 
-           npm install
-           npm run make-mac
+        run: npm run make-mac
         
       - name: Compiling
-        run: | 
-           npm install
-           ls
-           npm run make
+        run: npm run make
         
 
