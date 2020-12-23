@@ -1,28 +1,26 @@
 {
    "name":"Coastal-Freeze",
-   "version":"1.0.6",
+   "version":"1.1.1",
    "description":"Coastal-Freeze",
-   "productName":"Coastal Freeze",
+   "productName":"CF",
    "main":"main.js",
    "scripts":{
       "start":"electron .",
-      "make":"npx @electron-forge/cli make --arch=ia32",
+      "make":"npx @electron-forge/cli make --arch=x32",
       "make-mac":"npx @electron-forge/cli make",
       "publish":"electron-forge publish"
    },
-   "repository":"https://github.com/electron/electron-quick-start",
+   "repository":"https://github.com/AllinolCP/Coastal-Freeze",
    "keywords":[
-      "Electron",
-      "quick",
-      "start",
-      "tutorial",
-      "demo"
+      "coastal",
+	  "freeze",
+	  "club penguin",
+	  "cpr"
    ],
    "config":{
       "forge":{
          "packagerConfig":{
-            "icon":"./favicon.ico",
-            "executableName": "CoastalFreeze"
+            "icon":"./favicon.ico"
          },
          "github_repository":{
             "owner":"AllinolCP",
@@ -36,7 +34,23 @@
                   "darwin",
                   "win32"
                ]
-            }
+            },
+			{
+			   "name":"@electron-forge/maker-deb",
+			   "config":{
+				  "options":{
+					 "maintainer":"Coastal Freeze",
+					 "homepage":"https://coastalfreeze.net"
+				  }
+			   }
+			},
+			{
+			  "name": "@electron-forge/maker-wix",
+			  "config": {
+				"language": 1033,
+				"manufacturer": "Coastal Freeze"
+			  }
+			}
          ]
       }
    },
@@ -45,6 +59,8 @@
    "devDependencies":{
       "@electron-forge/cli":"^6.0.0-beta.54",
       "@electron-forge/maker-zip":"^6.0.0-beta.54",
+      "@electron-forge/maker-deb":"^6.0.0-beta.54",
+      "@electron-forge/maker-wix":"^6.0.0-beta.54",
       "electron":"^8.1.1"
    },
    "dependencies":{

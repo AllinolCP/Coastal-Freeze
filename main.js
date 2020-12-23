@@ -9,6 +9,9 @@ const path = require('path')
 const express = require('express');
 const server = express();
 
+
+if (require('electron-squirrel-startup')) return app.quit();
+
 let pluginName
 switch (process.platform) {
 	case 'win32':
@@ -33,6 +36,7 @@ app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName
 var win
 app.on('ready', () => {
     win = new BrowserWindow({
+		title: "Coastal Freeze",
         webPreferences: {
             plugins: true
         }
