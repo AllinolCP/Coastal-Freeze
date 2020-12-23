@@ -26,3 +26,12 @@ install:
 script:
 - if [ "$TRAVIS_OS_NAME" = "osx" ]; then npm run make-mac; else npm run make; fi; 
 after_success: if test -n "$TRAVIS_TAG"; then npm run publish; fi
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  file_glob: true
+  file: ./*.zip
+  skip_cleanup: true
+  on:
+    tags: true
