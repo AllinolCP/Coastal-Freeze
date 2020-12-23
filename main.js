@@ -30,10 +30,10 @@ switch (process.platform) {
 }
 app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName));
 
-let mainWindow = null
+let win = null
 app.on('ready', () => {
     makeMenu()
-    let win = new BrowserWindow({
+    var win = new BrowserWindow({
         webPreferences: {
             plugins: true
         }
@@ -62,22 +62,22 @@ function makeMenu() { // credits to random
                     label: 'Fullscreen (Toggle)',
                     accelerator: 'CmdOrCtrl+F',
                     click: () => {
-                        let fsbool = (mainWindow.isFullScreen() ? false : true);
-                        mainWindow.setFullScreen(fsbool);
+                        let fsbool = (win.isFullScreen() ? false : true);
+                        win.setFullScreen(fsbool);
                     }
                 },
                 {
                     label: 'Mute Audio (Toggle)',
                     click: () => {
-                        let ambool = (mainWindow.webContents.audioMuted ? false : true);
-                        mainWindow.webContents.audioMuted = ambool;
+                        let ambool = (win.webContents.audioMuted ? false : true);
+                        win.webContents.audioMuted = ambool;
                     }
                 },
                 {
                     label: 'Log Out',
                     click: () => {
                         clearCache();
-                        mainWindow.loadURL("https://play.coastalfreeze.net/");
+                        win.loadURL("https://play.coastalfreeze.net/");
                     }
                 }
             ]
@@ -99,22 +99,22 @@ function makeMenu() { // credits to random
             label: 'Fullscreen (Toggle)',
             accelerator: 'CmdOrCtrl+F',
             click: () => {
-                let fsbool = (mainWindow.isFullScreen() ? false : true);
-                mainWindow.setFullScreen(fsbool);
+                let fsbool = (win.isFullScreen() ? false : true);
+                win.setFullScreen(fsbool);
             }
         }));
         fsmenu.append(new MenuItem({
             label: 'Mute Audio (Toggle)',
             click: () => {
-                let ambool = (mainWindow.webContents.audioMuted ? false : true);
-                mainWindow.webContents.audioMuted = ambool;
+                let ambool = (win.webContents.audioMuted ? false : true);
+                win.webContents.audioMuted = ambool;
             }
         }));
         fsmenu.append(new MenuItem({
             label: 'Log Out',
             click: () => {
                 clearCache();
-                mainWindow.loadURL("https://play.coastalfreeze.net/");
+                win.loadURL("https://play.coastalfreeze.net/");
             }
         }));
     }
