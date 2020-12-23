@@ -34,9 +34,4 @@ deploy:
   file: ./*.zip
   skip_cleanup: true
   on:
-    tags: true
-
-branches:
-    only:
-    - master
-    - /v\d+\.\d+/
+    tags: false
