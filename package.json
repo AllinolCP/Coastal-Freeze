@@ -6,7 +6,8 @@
    "main":"main.js",
    "scripts":{
       "start":"electron .",
-      "build-win":"npx @electron-forge/cli make --arch=ia32"
+      "make":"npx @electron-forge/cli make --arch=ia32",
+      "publish": "electron-forge publish"
    },
    "repository":"https://github.com/electron/electron-quick-start",
    "keywords":[
