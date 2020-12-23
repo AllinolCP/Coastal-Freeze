@@ -7,7 +7,7 @@
    "scripts":{
       "start":"electron .",
       "make":"npx @electron-forge/cli make --arch=ia32",
-      "publish": "electron-forge publish"
+      "publish":"electron-forge publish"
    },
    "repository":"https://github.com/electron/electron-quick-start",
    "keywords":[
@@ -17,52 +17,58 @@
       "tutorial",
       "demo"
    ],
-	"config": {
-	  "forge": {
-		"packagerConfig": {"icon": "./favicon.ico"},
-		"github_repository": {
-		  "owner": "AllinolCP",
-		  "name": "Coastal-Freeze"
-	        },
-		"makers": [
-		  {
-			"name": "@electron-forge/maker-zip",
-			"platforms": ["linux", "darwin","win32"]
-		  },
-		  {
-			  name: '@electron-forge/maker-wix',
-			  config: {
-			    language: 1033,
-			    manufacturer: 'Coastal Freeze'
-			  }
-		  },
-			
-			{
-			  name: '@electron-forge/maker-deb',
-			  config: {
-			    options: {
-			      maintainer: 'Coastal Freeze',
-			      homepage: 'https://coastalfreeze.net'
-			    }
-			  }
-			},
-			
-		{
-			  name: '@electron-forge/maker-dmg',
-			  config: {
-			    format: 'ULFO'
-			  }
-			}
-		]
-	  }
-	},
+   "config":{
+      "forge":{
+         "packagerConfig":{
+            "icon":"./favicon.ico"
+         },
+         "github_repository":{
+            "owner":"AllinolCP",
+            "name":"Coastal-Freeze"
+         },
+         "makers":[
+            {
+               "name":"@electron-forge/maker-zip",
+               "platforms":[
+                  "linux",
+                  "darwin",
+                  "win32"
+               ]
+            },
+            {
+               "name":"@electron-forge/maker-wix",
+               "config":{
+                  "language":1033,
+                  "manufacturer":"Coastal Freeze"
+               }
+            },
+            {
+               "name":"@electron-forge/maker-deb",
+               "config":{
+                  "options":{
+                     "maintainer":"Coastal Freeze",
+                     "homepage":"https://coastalfreeze.net"
+                  }
+               }
+            },
+            {
+               "name":"@electron-forge/maker-dmg",
+               "config":{
+                  "format":"ULFO"
+               }
+            }
+         ]
+      }
+   },
    "author":"GitHub",
    "license":"CC0-1.0",
    "devDependencies":{
       "@electron-forge/cli":"^6.0.0-beta.54",
       "@electron-forge/maker-zip":"^6.0.0-beta.54",
-      "electron":"^8.1.1",
-      "electron-packager":"^12.1.2"
+      "@electron-forge/maker-wix":"^6.0.0-beta.54",
+      "@electron-forge/maker-deb":"^6.0.0-beta.54",
+      "@electron-forge/maker-dmg":"^6.0.0-beta.54",
+      "electron":"^8.1.1"
    },
    "dependencies":{
       "express":"^4.17.1"
