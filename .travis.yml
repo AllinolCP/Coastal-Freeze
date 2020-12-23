@@ -19,6 +19,10 @@ addons:
     - fakeroot
     - rpm
 
+before_install:
+- powershell Install-WindowsFeature Net-Framework-Core
+- cinst -y wixtoolset
+
 install:
 - npm install
 - npm update
@@ -35,3 +39,6 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+branches:
+  only:
+    - /v\d+\.\d+.\d+/
