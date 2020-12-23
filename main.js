@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, Menu} = require('electron')
 const path = require('path')
 const express = require('express');
 const server = express();
@@ -25,9 +25,9 @@ let mainWindow = null
         plugins: true
       }
     })
-    server.use('/', express.static(__dirname));
-	const infos = server.listen(0, 'localhost', () => win.loadURL("https://play.coastalfreeze.net/client"));
+    win.loadURL('https://play.coastalfreeze.net/client');
     // Something else
+    Menu.setApplicationMenu(fsmenu);
   })
 
 function makeMenu() { // credits to random
