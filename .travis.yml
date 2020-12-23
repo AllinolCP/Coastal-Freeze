@@ -20,6 +20,7 @@ addons:
     - rpm
 
 before_install:
+- set -e;
 - if [ "$TRAVIS_OS_NAME" = "windows" ]; then powershell Install-WindowsFeature Net-Framework-Core fi;
 - if [ "$TRAVIS_OS_NAME" = "windows" ]; then cinst -y wixtoolset fi;
 
