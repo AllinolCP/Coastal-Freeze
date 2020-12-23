@@ -2,7 +2,6 @@
    "name":"Coastal-Freeze",
    "version":"1.0.0",
    "description":"Coastal-Freeze",
-   "executableName": "CoastalFreeze",
    "productName":"Coastal Freeze",
    "main":"main.js",
    "scripts":{
@@ -21,7 +20,8 @@
    "config":{
       "forge":{
          "packagerConfig":{
-            "icon":"./favicon.ico"
+            "icon":"./favicon.ico",
+            "executableName": "CoastalFreeze"
          },
          "github_repository":{
             "owner":"AllinolCP",
