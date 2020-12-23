@@ -24,5 +24,5 @@ install:
 - npm update
 
 script:
-- npm run make;
+- if [ "$TRAVIS_OS_NAME" = "osx" ]; then npm run make-mac; else npm run make; fi; 
 after_success: if test -n "$TRAVIS_TAG"; then npm run publish; fi
