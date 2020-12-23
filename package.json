@@ -16,23 +16,41 @@
       "tutorial",
       "demo"
    ],
-   "config":{
-      "forge":{
-         "packagerConfig":{
-            "icon":"./favicon.ico"
-         },
-         "makers":[
-            {
-               "name":"@electron-forge/maker-zip",
-               "platforms":[
-                  "linux",
-                  "darwin",
-                  "win32"
-               ]
-            }
-         ]
-      }
-   },
+	"config": {
+	  "forge": {
+		"packagerConfig": {"icon": "./favicon.ico"},
+		"makers": [
+		  {
+			"name": "@electron-forge/maker-zip",
+			"platforms": ["linux", "darwin","win32"]
+		  },
+		  {
+			  name: '@electron-forge/maker-wix',
+			  config: {
+			    language: 1033,
+			    manufacturer: 'Coastal Freeze'
+			  }
+		  },
+			
+			{
+			  name: '@electron-forge/maker-deb',
+			  config: {
+			    options: {
+			      maintainer: 'Coastal Freeze',
+			      homepage: 'https://coastalfreeze.net'
+			    }
+			  }
+			},
+			
+		{
+			  name: '@electron-forge/maker-dmg',
+			  config: {
+			    format: 'ULFO'
+			  }
+			}
+		]
+	  }
+	},
    "author":"GitHub",
    "license":"CC0-1.0",
    "devDependencies":{
