@@ -11,15 +11,22 @@ const server = express();
 
 let pluginName
 switch (process.platform) {
-case 'win32':
-    pluginName = 'flash/pepflashplayer32_32_0_0_303.dll'
-    break
-case 'darwin':
-    pluginName = 'flash/PepperFlashPlayer.plugin'
-    break
-case 'linux':
-    pluginName = 'flash/libpepflashplayer.so'
-    break
+	case 'win32':
+		switch(process.arch){
+			case 'ia32':
+				pluginName = 'flash/pepflashplayer32_32_0_0_303.dll'
+				break
+			case 'x64':
+				pluginName = 'flash/pepflashplayer64_32_0_0_303.dll'
+				break
+		}
+		break
+	case 'darwin':
+		pluginName = 'flash/PepperFlashPlayer.plugin'
+		break
+	case 'linux':
+		pluginName = 'flash/libpepflashplayer.so'
+		break
 }
 app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName));
 
