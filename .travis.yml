@@ -19,11 +19,6 @@ addons:
     - fakeroot
     - rpm
 
-before_install:
-- if [ "$TRAVIS_OS_NAME" = "windows" ]; then powershell Install-WindowsFeature Net-Framework-Core; fi; 
-- if [ "$TRAVIS_OS_NAME" = "windows" ]; then cinst -y wixtoolset; fi; 
-- if [ "$TRAVIS_OS_NAME" = "windows" ]; then export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' "); fi; 
-
 install:
 - npm install
 - npm update

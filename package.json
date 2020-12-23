@@ -34,23 +34,7 @@
                   "darwin",
                   "win32"
                ]
-            },
-			{
-			   "name":"@electron-forge/maker-deb",
-			   "config":{
-				  "options":{
-					 "maintainer":"Coastal Freeze",
-					 "homepage":"https://coastalfreeze.net"
-				  }
-			   }
-			},
-			{
-			  "name": "@electron-forge/maker-wix",
-			  "config": {
-				"language": 1033,
-				"manufacturer": "Coastal Freeze"
-			  }
-			}
+            }
          ]
       }
    },
