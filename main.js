@@ -1,10 +1,8 @@
 const {app, BrowserWindow} = require('electron')
-  const path = require('path')
-app.commandLine.appendSwitch('no-sandbox');
+const path = require('path')
 const express = require('express');
 const server = express();
-  
-  // Specify flash path, supposing it is placed in the same directory with main.js.
+
 let pluginName
 switch (process.platform) {
   case 'win32':
@@ -17,25 +15,99 @@ switch (process.platform) {
     pluginName = 'flash/libpepflashplayer.so'
     break
 }
-console.log(process.arch)
-console.log(process.platform)
-
-
 app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName));
 
 let mainWindow = null
   app.on('ready', () => {
+    makeMenu()
     let win = new BrowserWindow({
       webPreferences: {
         plugins: true
       }
     })
     server.use('/', express.static(__dirname));
-	win.setMenuBarVisibility(false)
 	const infos = server.listen(0, 'localhost', () => win.loadURL("https://play.coastalfreeze.net/client"));
     // Something else
   })
 
+function makeMenu() { // credits to random
+  fsmenu = new Menu();
+  if (process.platform == 'darwin') {
+    fsmenu.append(new MenuItem({
+      label: "Coastal Freeze Client",
+      submenu: 
+      [
+        {
+        label: 'About',
+          click: () => { 
+            dialog.showMessageBox({
+              type: "info",
+              buttons: ["Ok"],
+              title: "About Coastal Freeze DLC",
+              message: aboutMessage
+            });
+          } 
+        }, 
+        {
+          label: 'Fullscreen (Toggle)',
+          accelerator: 'CmdOrCtrl+F',
+          click: () => { 
+            let fsbool = (mainWindow.isFullScreen() ? false : true);
+            mainWindow.setFullScreen(fsbool);
+          }
+        },
+        {
+          label: 'Mute Audio (Toggle)',
+          click: () => { 
+            let ambool = (mainWindow.webContents.audioMuted ? false : true);
+            mainWindow.webContents.audioMuted = ambool;
+          }
+        },
+        {
+          label: 'Log Out',
+          click: () => { 
+            clearCache();
+            mainWindow.loadURL("https://play.coastalfreeze.net/");
+          }
+        }
+    ]
+    }));
+  } else {
+    fsmenu.append(new MenuItem({
+      label: 'About',
+      click: () => { 
+        dialog.showMessageBox({
+          type: "info",
+          buttons: ["Ok"],
+          title: "About Coastal Freeze DLC",
+          message: aboutMessage
+        });
+      }
+    }));
+    fsmenu.append(new MenuItem({
+      label: 'Fullscreen (Toggle)',
+      accelerator: 'CmdOrCtrl+F',
+      click: () => { 
+        let fsbool = (mainWindow.isFullScreen() ? false : true);
+        mainWindow.setFullScreen(fsbool);
+      }
+    }));
+    fsmenu.append(new MenuItem({
+      label: 'Mute Audio (Toggle)',
+      click: () => { 
+        let ambool = (mainWindow.webContents.audioMuted ? false : true);
+        mainWindow.webContents.audioMuted = ambool;
+      }
+    }));
+    fsmenu.append(new MenuItem({
+      label: 'Log Out',
+        click: () => { 
+          clearCache();
+          mainWindow.loadURL("https://play.coastalfreeze.net/");
+        }
+    }));
+  }
+}
 
 app.on('window-all-closed', () => {
   app.quit();
