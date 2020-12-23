@@ -30,14 +30,14 @@ switch (process.platform) {
 }
 app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName));
 
-let win = null
+var win
 app.on('ready', () => {
-    makeMenu()
-    var win = new BrowserWindow({
+    win = new BrowserWindow({
         webPreferences: {
             plugins: true
         }
     })
+	makeMenu()
     win.loadURL('https://play.coastalfreeze.net/client');
     Menu.setApplicationMenu(fsmenu);
 })
