@@ -20,7 +20,8 @@ addons:
     - rpm
     
 before_install:
-- if [ "$TRAVIS_OS_NAME" = "windows" ]; then powershell Install-WindowsFeature Net-Framework-Core && cinst -y wixtoolset && export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' ") fi;
+- if [ "$TRAVIS_OS_NAME" = "windows" ]; then powershell Install-WindowsFeature Net-Framework-Core && cinst -y wixtoolset fi;
+
 install:
 - npm install
 - npm update
