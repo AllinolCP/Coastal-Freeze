@@ -38,7 +38,7 @@ app.on('ready', () => {
         }
     })
 	makeMenu()
-    win.loadURL('https://play.coastalfreeze.net/client');
+    win.loadFile('index.html')
     Menu.setApplicationMenu(fsmenu);
 })
 
