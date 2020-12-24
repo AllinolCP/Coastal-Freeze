@@ -3,8 +3,6 @@
    "version": "1.2.0",
    "description": "Coastal Freeze Client",
    "productName": "CF",
-   "email":"support@coastalfreeze.net",
-   "url":"https://play.coastalfreeze.net/",
    "main": "main.js",
    "scripts": {
       "start": "electron ."
@@ -32,7 +30,7 @@
       "icon": "favicon.ico"
     }
   },
-   "author": "GitHub",
+   "author": "Coastal Freeze <support@coastalfreeze.net> (https://coastalfreeze.net)",
    "license": "CC0-1.0",
    "devDependencies": {
       "electron-builder":"^22.9.1",
