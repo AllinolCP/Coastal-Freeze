@@ -5,10 +5,7 @@
    "productName": "CF",
    "main": "main.js",
    "scripts": {
-      "start": "electron .",
-      "make": "npx @electron-forge/cli make --arch=ia32",
-      "make-mac": "npx @electron-forge/cli make",
-      "publish": "electron-forge publish"
+      "start": "electron ."
    },
    "repository": "https://github.com/AllinolCP/Coastal-Freeze",
    "keywords": [
@@ -17,34 +14,38 @@
       "club penguin",
       "cpr"
    ],
-   "config": {
-      "forge": {
-         "packagerConfig": {
-            "icon": "./favicon.ico"
-         },
-         "github_repository": {
-            "owner": "AllinolCP",
-            "name": "Coastal-Freeze"
-         },
-         "makers": [
-            {
-               "name": "@electron-forge/maker-zip",
-               "platforms": [
-                  "linux",
-                  "darwin",
-                  "win32"
-               ]
-            }
-         ]
-      }
-   },
+  "build": {
+    "appId": "net.coastalfreeze",
+    "category": "public.app-category.games",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "favicon.ico"
+    }
+  },
    "author": "GitHub",
    "license": "CC0-1.0",
    "devDependencies": {
-      "@electron-forge/cli": "^6.0.0-beta.54",
-      "@electron-forge/maker-zip": "^6.0.0-beta.54",
-      "@electron-forge/maker-deb": "^6.0.0-beta.54",
-      "@electron-forge/maker-wix": "^6.0.0-beta.54",
+      "electron-builder":"^22.9.1",
       "electron": "^8.1.1"
    },
    "dependencies": {
