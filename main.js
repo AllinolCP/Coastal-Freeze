@@ -53,8 +53,11 @@ app.on('ready', () => {
     Menu.setApplicationMenu(fsmenu);
 })
 
-var aboutMessage = `This standalone client for Coastal Freeze was made by Allinol & Random.
-					It was made to not let Flash die forever by the end of December 2020`
+const aboutMessage = `
+Coastal Freeze Client v${app.getVersion()}
+Created by Allinol and Random for use with Coastal Freeze.
+Owners of Coastal Freeze: Fliberjig1 and Snickerdoodle
+`;
 
 function makeMenu() { // credits to random
     fsmenu = new Menu();
