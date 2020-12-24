@@ -53,11 +53,9 @@ app.on('ready', () => {
     Menu.setApplicationMenu(fsmenu);
 })
 
-const aboutMessage = `
-Coastal Freeze Client v${app.getVersion()}
+const aboutMessage = `Coastal Freeze Client ${app.getVersion()}
 Created by Allinol and Random for use with Coastal Freeze.
-Owners of Coastal Freeze: Fliberjig1 and Snickerdoodle
-`;
+Owners of Coastal Freeze: Fliberjig1 and Snickerdoodle`;
 
 function makeMenu() { // credits to random
     fsmenu = new Menu();
