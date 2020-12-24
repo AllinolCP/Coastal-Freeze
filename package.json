@@ -1,6 +1,6 @@
 {
    "name": "Coastal-Freeze",
-   "version": "1.2.1",
+   "version": "1.2.4",
    "description": "Coastal Freeze Client",
    "productName": "CF",
    "main": "main.js",
@@ -17,19 +17,22 @@
   "build": {
     "appId": "net.coastalfreeze",
      "mac": {
-       "icon": "favicon.icns",
+	   "asar": false,
+       "icon": "icons/favicon.icns",
        "category": "public.app-category.games"
      },
     "linux": {
-      "icon": "favicon.png",
+	  "asar": false,
+      "icon": "icons/favicon.png",
       "target": [
         "AppImage",
         "deb"
       ]
     },
     "win": {
+	  "asar": false,
       "target": "nsis",
-      "icon": "favicon.png"
+      "icon": "icons/favicon.png"
     }
   },
    "author": "Coastal Freeze <support@coastalfreeze.net> (https://coastalfreeze.net)",
