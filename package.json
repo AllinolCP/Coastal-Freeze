@@ -25,17 +25,28 @@
 	  "asar": false,
 	  "ia32": true,
 	  "x64": true,
-      "target": [
-        "AppImage",
-        "deb"
-      ],
+	  "target": [
+		{
+		  "target": ["AppImage", "deb"],
+		   "arch": [
+		 	"x64",
+		 	"ia32"
+		  ]
+		}
+	  ],
       "icon": "icons/favicon.ico"
     },
     "win": {
 	  "asar": false,
-	  "ia32": true,
-	  "x64": true,
-      "target": "nsis",
+	  "target": [
+		{
+		  "target": "nsis",
+		  "arch": [
+			"x64",
+			"ia32"
+		  ]
+		}
+	  ],
       "icon": "icons/favicon.ico"
     }
   },
