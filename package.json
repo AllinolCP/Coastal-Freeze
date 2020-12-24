@@ -39,7 +39,7 @@
 		  ]
 		}
 	  ],
-      "icon": "icons/favicon.ico"
+      "icon": "icons/favicon.png"
     },
     "win": {
 	  "asar": false,
