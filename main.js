@@ -19,6 +19,9 @@ switch (process.platform) {
 			case 'ia32':
 				pluginName = 'flash/pepflashplayer32_32_0_0_303.dll'
 				break
+			case 'x32':
+				pluginName = 'flash/pepflashplayer32_32_0_0_303.dll'
+				break
 			case 'x64':
 				pluginName = 'flash/pepflashplayer64_32_0_0_303.dll'
 				break
@@ -51,7 +54,7 @@ app.on('ready', () => {
 })
 
 var aboutMessage = `This standalone client for Coastal Freeze was made by Allinol & Random.
-					it was made to not let Flash die forever by the end of December 2020`
+					It was made to not let Flash die forever by the end of December 2020`
 
 function makeMenu() { // credits to random
     fsmenu = new Menu();
@@ -86,7 +89,7 @@ function makeMenu() { // credits to random
                     label: 'Log Out',
                     click: () => {
                         clearCache();
-                        win.loadURL("https://play.coastalfreeze.net/");
+                        win.loadFile('index.html');
                     }
                 }
             ]
@@ -121,7 +124,7 @@ function makeMenu() { // credits to random
             label: 'Log Out',
             click: () => {
                 clearCache();
-                win.loadURL("https://play.coastalfreeze.net/");
+                win.loadFile('index.html');
             }
         }));
     }
@@ -138,12 +141,12 @@ autoUpdater.on('update-available', () => {
   win.webContents.send('update_available');
 });
 
-
-// end of Auto update part
-
 ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
 });
+
+// end of Auto update part
+
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
