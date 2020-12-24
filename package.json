@@ -23,8 +23,6 @@
      },
     "linux": {
 	  "asar": false,
-	  "ia32": true,
-	  "x64": true,
 	  "target": [
 		{
 		  "target":  "deb",
