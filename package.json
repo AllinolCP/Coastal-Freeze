@@ -4,7 +4,7 @@
    "description": "Coastal Freeze Client",
    "productName": "CF",
    "email":"support@coastalfreeze.net",
-   "url" : "https://play.coastalfreeze.net/"
+   "url":"https://play.coastalfreeze.net/",
    "main": "main.js",
    "scripts": {
       "start": "electron ."
