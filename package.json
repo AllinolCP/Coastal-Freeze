@@ -34,6 +34,7 @@
    "license": "CC0-1.0",
    "devDependencies": {
       "electron-builder":"^22.9.1",
+      "electron-builder-squirrel-windows":"^22.9.1",
       "electron": "^8.1.1"
    },
    "dependencies": {
