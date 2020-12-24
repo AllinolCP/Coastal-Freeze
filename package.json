@@ -17,9 +17,11 @@
   "build": {
     "appId": "net.coastalfreeze",
      "mac": {
+       "icon": "favicon.icns",
        "category": "public.app-category.games"
      },
     "linux": {
+      "icon": "favicon.png",
       "target": [
         "AppImage",
         "deb"
@@ -27,7 +29,7 @@
     },
     "win": {
       "target": "squirrel",
-      "icon": "favicon.ico"
+      "icon": "favicon.png"
     }
   },
    "author": "Coastal Freeze <support@coastalfreeze.net> (https://coastalfreeze.net)",
