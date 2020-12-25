@@ -15,6 +15,13 @@
       "cpr"
    ],
   "build": {
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "AllinolCP",
+        "repo": "Coastal-Freeze"
+      }
+    ],	
     "appId": "net.coastalfreeze",
      "mac": {
 	   "asar": false,
