@@ -8,6 +8,8 @@ const {
     nativeTheme
 } = require('electron')
 
+const DiscordRPC = require('discord-rpc');
+
 const {
     autoUpdater
 } = require('electron-updater');
@@ -66,7 +68,21 @@ const aboutMessage = `Coastal Freeze Client v${app.getVersion()}
 Created by Allinol and Random for use with Coastal Freeze.
 Owners of Coastal Freeze: Fliberjig1 and Snickerdoodle`;
 
-
+function activateRPC() { 
+  const clientId = '792072685790167070'; 
+  DiscordRPC.register(clientId);
+  const rpc = new DiscordRPC.Client({ transport: 'ipc' }); 
+  const startTimestamp = new Date();
+  rpc.on('ready', () => {
+    rpc.setActivity({
+      details: `coastalfreeze.net.net`, 
+      state: `Desktop Client`, 
+      startTimestamp, 
+      largeImageKey: `main-logo`
+    });
+  });
+  rpc.login({ clientId }).catch();
+}
 
 function makeMenu() { // credits to random
     fsmenu = new Menu();
