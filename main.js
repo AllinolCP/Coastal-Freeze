@@ -194,8 +194,8 @@ function darkMode() {
 
 // Auto update part
 
-autoUpdater.on('update-available', () => {
-    win.webContents.send('update_available');
+autoUpdater.on('update-available', (updateInfo) => {
+    win.webContents.send('update_available', updateInfo.version);
 });
 
 autoUpdater.on('update-downloaded', () => {
