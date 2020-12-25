@@ -1,8 +1,7 @@
 <title>Coastal Freeze</title>
-<object type="application/x-shockwave-flash" id="game" name="game" data="https://play.coastalfreeze.net/media/boots.swf" width="100%" height="98%">
-
-
-
+<link href="https://db.onlinewebfonts.com/c/9f62e2b9b9235acb5512c7f03cf0f792?family=Burbank+Small" rel="stylesheet" type="text/css"/>
+<body>
+<object type="application/x-shockwave-flash" id="game" name="game" data="https://play.coastalfreeze.net/media/boots.swf" width="100%" height="98%"></object>
 <div id="notification" class="hidden">
   <p id="message"></p>
   <button id="close-button" onClick="closeNotification()">
@@ -12,8 +11,11 @@
     Restart
   </button>
 </div>
-
+</body>
 <style>
+
+@import url(https://db.onlinewebfonts.com/c/9f62e2b9b9235acb5512c7f03cf0f792?family=Burbank+Small);
+@font-face {font-family: "Burbank Small"; src: url("https://db.onlinewebfonts.com/t/9f62e2b9b9235acb5512c7f03cf0f792.eot"); src: url("https://db.onlinewebfonts.com/t/9f62e2b9b9235acb5512c7f03cf0f792.eot?#iefix") format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/9f62e2b9b9235acb5512c7f03cf0f792.woff2") format("woff2"), url("https://db.onlinewebfonts.com/t/9f62e2b9b9235acb5512c7f03cf0f792.woff") format("woff"), url("https://db.onlinewebfonts.com/t/9f62e2b9b9235acb5512c7f03cf0f792.ttf") format("truetype"), url("https://db.onlinewebfonts.com/t/9f62e2b9b9235acb5512c7f03cf0f792.svg#Burbank Small") format("svg"); }
 #notification {
   position: fixed;
   bottom: 20px;
@@ -21,15 +23,32 @@
   width: 200px;
   padding: 20px;
   border-radius: 5px;
-  background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+button { 
+  font-family:"Burbank Small";
+  }
+p { 
+  font-family:"Burbank Small";
+  }
 .hidden {
   display: none;
+}
+@media (prefers-color-scheme: dark) {
+  body { background:  #333; color: white; }
+  #notification { background:  #333; color: white; }
+  object  { background:  #333; color: white; }
+}
+
+@media (prefers-color-scheme: light) {
+  body { background:  #ffffff; color: black; }
+  object  { background:  #ffffff; color: black; }
+  #notification { background:  #ffffff; color: black; }
 }
 </style>
 
 <script>
+const {ipcRenderer} = require('electron');
 const notification = document.getElementById('notification');
 const message = document.getElementById('message');
 const restartButton = document.getElementById('restart-button');
@@ -44,6 +63,20 @@ ipcRenderer.on('update_downloaded', () => {
   restartButton.classList.remove('hidden');
   notification.classList.remove('hidden');
 });
+ipcRenderer.on('muted', (event, data) => {
+	localStorage.muted = data;
+});
+ipcRenderer.on('theme', (event, data) => {
+	localStorage.theme = data;
+});
+
+window.addEventListener('load', (event) => {
+	if(localStorage.muted == undefined){
+		localStorage.muted = false;
+		localStorage.theme = 'dark';
+	}
+	 ipcRenderer.sendSync('load:data', localStorage.muted, localStorage.theme)
+});
 
 function closeNotification() {
   notification.classList.add('hidden');
@@ -52,8 +85,5 @@ function restartApp() {
   ipcRenderer.send('restart_app');
 }
 
-ipcMain.on('restart_app', () => {
-  autoUpdater.quitAndInstall();
-});
-
 </script>
+
