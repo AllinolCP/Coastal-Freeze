@@ -14,60 +14,60 @@
       "club penguin",
       "cpr"
    ],
-  "build": {
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "AllinolCP",
-        "repo": "Coastal-Freeze"
+   "build": {
+      "publish": [
+         {
+            "provider": "github",
+            "owner": "AllinolCP",
+            "repo": "Coastal-Freeze"
+         }
+      ],
+      "appId": "net.coastalfreeze",
+      "mac": {
+         "asar": false,
+         "category": "public.app-category.games",
+         "icon": "icons/favicon.icns"
+      },
+      "linux": {
+         "asar": false,
+         "target": [
+            {
+               "target": "deb",
+               "arch": [
+                  "x64",
+                  "ia32"
+               ]
+            },
+            {
+               "target": "AppImage",
+               "arch": [
+                  "x64",
+                  "ia32"
+               ]
+            }
+         ],
+         "icon": "icons/favicon.png"
+      },
+      "win": {
+         "asar": false,
+         "target": [
+            {
+               "target": "nsis",
+               "arch": [
+                  "x64",
+                  "ia32"
+               ]
+            }
+         ],
+         "icon": "icons/favicon.ico"
       }
-    ],	
-    "appId": "net.coastalfreeze",
-     "mac": {
-	   "asar": false,
-       "category": "public.app-category.games",
-       "icon": "icons/favicon.icns"
-     },
-    "linux": {
-	  "asar": false,
-	  "target": [
-		{
-		  "target":  "deb",
-		   "arch": [
-		 	"x64",
-		 	"ia32"
-		  ]
-		},
-		{
-		  "target":  "AppImage",
-		   "arch": [
-		 	"x64",
-		 	"ia32"
-		  ]
-		}
-	  ],
-      "icon": "icons/favicon.png"
-    },
-    "win": {
-	  "asar": false,
-	  "target": [
-		{
-		  "target": "nsis",
-		  "arch": [
-			"x64",
-			"ia32"
-		  ]
-		}
-	  ],
-      "icon": "icons/favicon.ico"
-    }
-  },
+   },
    "author": "Coastal Freeze <support@coastalfreeze.net> (https://coastalfreeze.net)",
    "license": "CC0-1.0",
    "devDependencies": {
-      "electron-builder":"^22.9.1",
-      "discord-rpc": "^3.1.0",
-      "electron": "^8.1.1"
+      "discord-rpc": "^3.1.4",
+      "electron": "^8.1.1",
+      "electron-builder": "^22.9.1"
    },
    "dependencies": {
       "electron-updater": "^4.3.5"
