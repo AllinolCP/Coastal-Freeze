@@ -43,26 +43,32 @@ app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName
 
 var win
 app.on('ready', () => {
-    win = new BrowserWindow({
-        title: "Coastal Freeze",
-        webPreferences: {
-            plugins: true,
-            nodeIntegration: true
-        }
-    })
-    makeMenu()
+    createWindow();
+})
+
+//window creation function
+function createWindow() {
+    win = new BrowserWindow
+    ({
+    title: "Coastal Freeze",
+    webPreferences: {
+        plugins: true,
+        nodeIntegration: true
+    }
+    });
+    makeMenu();
     ipcMain.on('load:data', (event, mute, theme) => {
         muted = (mute == 'true');
 		console.log(muted, typeof(muted))
         nativeTheme.themeSource = theme;
         win.webContents.audioMuted = muted;
     });
-	activateRPC()
+    activateRPC();
 	
     win.loadFile('index.html');
     autoUpdater.checkForUpdatesAndNotify();
     Menu.setApplicationMenu(fsmenu);
-})
+}
 
 // start of menubar part
 
@@ -220,4 +226,8 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit();
     }
+});
+
+app.on('activate', function () {
+  if (win === null) {createWindow();}
 });
