@@ -57,6 +57,8 @@ app.on('ready', () => {
         nativeTheme.themeSource = theme;
         win.webContents.audioMuted = muted;
     });
+	activateRPC()
+	
     win.loadFile('index.html');
     autoUpdater.checkForUpdatesAndNotify();
     Menu.setApplicationMenu(fsmenu);
@@ -75,7 +77,7 @@ function activateRPC() {
   const startTimestamp = new Date();
   rpc.on('ready', () => {
     rpc.setActivity({
-      details: `coastalfreeze.net.net`, 
+      details: `coastalfreeze.net`, 
       state: `Desktop Client`, 
       startTimestamp, 
       largeImageKey: `main-logo`

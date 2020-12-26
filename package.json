@@ -65,6 +65,7 @@
    "author": "Coastal Freeze <support@coastalfreeze.net> (https://coastalfreeze.net)",
    "license": "CC0-1.0",
    "devDependencies": {
+      "register-scheme": "^0.0.2",
       "discord-rpc": "^3.1.4",
       "electron": "^8.1.1",
       "electron-builder": "^22.9.1"
