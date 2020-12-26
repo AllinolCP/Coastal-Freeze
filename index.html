@@ -51,6 +51,7 @@ p {
 <script>
 const {ipcRenderer} = require('electron');
 const notification = document.getElementById('notification');
+const game = document.getElementById('game');
 const message = document.getElementById('message');
 const restartButton = document.getElementById('restart-button');
 ipcRenderer.on('update_available', () => {
@@ -69,6 +70,7 @@ ipcRenderer.on('muted', (event, data) => {
 });
 ipcRenderer.on('theme', (event, data) => {
 	localStorage.theme = data;
+	game.setDarkMode()
 });
 
 window.addEventListener('load', (event) => {
@@ -78,6 +80,12 @@ window.addEventListener('load', (event) => {
 	}
 	 ipcRenderer.sendSync('load:data', localStorage.muted, localStorage.theme)
 });
+
+function loadSettings() { 
+	if(localStorage.theme === 'dark'){
+		game.setDarkMode()
+	}
+}
 
 function closeNotification() {
   notification.classList.add('hidden');
