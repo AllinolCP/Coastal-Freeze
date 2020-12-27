@@ -12,7 +12,7 @@ const DiscordRPC = require('discord-rpc');
 
 const {
     autoUpdater
-} = require('electron-updater');
+} = require("electron-differential-updater");
 
 const path = require('path')
 
@@ -65,7 +65,7 @@ function createWindow() {
     });
     activateRPC();
 	
-    win.loadFile('index.html');
+    win.loadURL('https://play.coastalfreeze.net/client/');
     autoUpdater.checkForUpdatesAndNotify();
     Menu.setApplicationMenu(fsmenu);
 }
@@ -133,7 +133,7 @@ function makeMenu() { // credits to random
                     label: 'Log Out',
                     click: () => {
                         clearCache();
-                        win.loadFile('index.html');
+                        win.loadURL('https://play.coastalfreeze.net/client/');
                     }
                 }
             ]
@@ -175,7 +175,7 @@ function makeMenu() { // credits to random
             label: 'Log Out',
             click: () => {
                 clearCache();
-                win.loadFile('index.html');
+                win.loadURL('https://play.coastalfreeze.net/client/');
             }
         }));
     }
