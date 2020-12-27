@@ -69,7 +69,7 @@
       "electron-builder": "^22.9.1"
    },
    "dependencies": {
-      "electron-differential-updater": "^4.3.2",
+      "electron-updater": "^4.3.2",
       "discord-rpc": "^3.1.4"
    }
 }
