@@ -12,7 +12,7 @@ const DiscordRPC = require('discord-rpc');
 
 const {
     autoUpdater
-} = require("electron-differential-updater");
+} = require("electron-updater");
 
 const path = require('path')
 
