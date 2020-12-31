@@ -68,6 +68,10 @@ function createWindow() {
     win.loadURL('https://play.coastalfreeze.net/client/');
     autoUpdater.checkForUpdatesAndNotify();
     Menu.setApplicationMenu(fsmenu);
+	
+    mainWindow.on('closed', () => {
+    	mainWindow = null;
+    });
 }
 
 // start of menubar part
