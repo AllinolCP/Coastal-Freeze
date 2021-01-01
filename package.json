@@ -27,7 +27,8 @@
       "mac": {
          "asar": false,
          "category": "public.app-category.games",
-         "icon": "icons/mac_os_icon.icns"
+         "icon": "icons/mac_os_icon.icns",
+		 "background":"background/macos_bg.png"
       },
       "linux": {
          "asar": false,
