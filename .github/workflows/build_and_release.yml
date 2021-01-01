@@ -1,10 +1,10 @@
 name: Build/release
 
-on: 
+on:
   workflow_dispatch:
   push:
-    branches-ignore:
-      - master
+    tags:
+    - '*'
 
 jobs:
   release:
