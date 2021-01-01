@@ -1,77 +1,75 @@
 {
-   "name": "coastal-freeze",
-   "version": "1.0.0",
-   "description": "Coastal Freeze Client",
-   "productName": "Coastal Freeze",
-   "main": "main.js",
-   "scripts": {
-      "start": "electron ."
-   },
-   "repository": "https://github.com/AllinolCP/Coastal-Freeze",
-   "keywords": [
-      "coastal",
-      "freeze",
-      "club penguin",
-      "cpr",
-	  "coastal freeze"
-   ],
-   "build": {
-      "publish": [
-         {
-            "provider": "github",
-            "owner": "AllinolCP",
-            "repo": "Coastal-Freeze"
-         }
-      ],
-      "appId": "net.coastalfreeze.client",
-      "mac": {
-         "asar": false,
-         "category": "public.app-category.games",
-         "icon": "icons/mac_os_icon.icns",
-		 "background":"background/macos_bg.png"
-      },
-      "linux": {
-         "asar": false,
-         "target": [
-            {
-               "target": "deb",
-               "arch": [
-                  "x64",
-                  "ia32"
-               ]
-            },
-            {
-               "target": "AppImage",
-               "arch": [
-                  "x64",
-                  "ia32"
-               ]
-            }
-         ],
-         "icon": "icons/linux_icon.png"
-      },
-      "win": {
-         "asar": false,
-         "target": [
-            {
-               "target": "nsis",
-               "arch": [
-                  "x64",
-                  "ia32"
-               ]
-            }
-         ],
-         "icon": "icons/windows_icon.png"
-      }
-   },
-   "author": "Coastal Freeze <support@coastalfreeze.net> (https://coastalfreeze.net)",
-   "license": "CC0-1.0",
-   "devDependencies": {
-      "electron": "^8.1.1",
-      "electron-builder": "^22.9.1"
-   },
-   "dependencies": {
-      "electron-updater": "^4.3.2",
-      "discord-rpc": "^3.1.4"
-   }
+	"name": "coastal-freeze",
+	"version": "1.0.0",
+	"description": "Coastal Freeze Client",
+	"productName": "Coastal Freeze",
+	"main": "main.js",
+	"scripts": {
+		"start": "electron ."
+	},
+	"repository": "https://github.com/AllinolCP/Coastal-Freeze",
+	"keywords": [
+		"coastal",
+		"freeze",
+		"club penguin",
+		"cpr",
+		"coastal freeze"
+	],
+	"build": {
+		"publish": [{
+			"provider": "github",
+			"owner": "AllinolCP",
+			"repo": "Coastal-Freeze"
+		}],
+		"appId": "net.coastalfreeze.client",
+		"mac": {
+			"asar": false,
+			"target": "dmg",
+			"category": "public.app-category.games",
+			"icon": "icons/mac_os_icon.icns"
+		},
+		"dmg": {
+			"background": "background/macos_bg.png"
+		},
+		"linux": {
+			"asar": false,
+			"target": [{
+					"target": "deb",
+					"arch": [
+						"x64",
+						"ia32"
+					]
+				},
+				{
+					"target": "AppImage",
+					"arch": [
+						"x64",
+						"ia32"
+					]
+				}
+			],
+			"icon": "icons/linux_icon.png"
+		},
+		"win": {
+			"asar": false,
+			"target": [{
+				"target": "nsis",
+				"arch": [
+					"x64",
+					"ia32"
+				]
+			}],
+			"icon": "icons/windows_icon.png"
+		}
+	},
+	"author": "Coastal Freeze <support@coastalfreeze.net> (https://coastalfreeze.net)",
+	"license": "CC0-1.0",
+	"devDependencies": {
+		"electron": "^8.1.1",
+		"electron-builder": "^22.9.1"
+	},
+	"dependencies": {
+		"electron-updater": "^4.3.2",
+		"discord-rpc": "^3.1.4"
+	}
 }
