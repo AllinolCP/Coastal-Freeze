@@ -20,6 +20,7 @@ const path = require('path')
 let pluginName
 switch (process.platform) {
 case 'win32':
+	imageName = 'windows_icon';
     switch (process.arch) {
     case 'ia32':
         pluginName = 'flash/pepflashplayer32_32_0_0_303.dll'
@@ -33,9 +34,11 @@ case 'win32':
     }
     break
 case 'darwin':
+	imageName = 'mac_os_icon';
     pluginName = 'flash/PepperFlashPlayer.plugin'
     break
 case 'linux':
+	imageName = 'linux_icon';
     pluginName = 'flash/libpepflashplayer.so'
     break
 }
@@ -69,8 +72,8 @@ function createWindow() {
     autoUpdater.checkForUpdatesAndNotify();
     Menu.setApplicationMenu(fsmenu);
 	
-    mainWindow.on('closed', () => {
-    	mainWindow = null;
+    win.on('closed', () => {
+    	win = null;
     });
 }
 
@@ -90,7 +93,7 @@ function activateRPC() {
       details: `coastalfreeze.net`, 
       state: `Desktop Client`, 
       startTimestamp, 
-      largeImageKey: `main-logo`
+      largeImageKey: imageName
     });
   });
   rpc.login({ clientId }).catch();

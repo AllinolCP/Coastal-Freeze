@@ -2,8 +2,9 @@ name: Build/release
 
 on: 
   workflow_dispatch:
-  schedule:
-    - cron: '0 12 * * *'
+  push:
+    branches-ignore:
+      - master
 
 jobs:
   release:
