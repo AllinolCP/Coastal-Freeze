@@ -1,6 +1,6 @@
 {
 	"name": "coastal-freeze",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Coastal Freeze Client",
 	"productName": "Coastal Freeze",
 	"main": "main.js",

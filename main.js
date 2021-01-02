@@ -19,28 +19,38 @@ const path = require('path')
 
 let pluginName
 switch (process.platform) {
-case 'win32':
-	imageName = 'windows_icon';
-    switch (process.arch) {
-    case 'ia32':
-        pluginName = 'flash/pepflashplayer32_32_0_0_303.dll'
-        break
-    case 'x32':
-        pluginName = 'flash/pepflashplayer32_32_0_0_303.dll'
-        break
-    case 'x64':
-        pluginName = 'flash/pepflashplayer64_32_0_0_303.dll'
-        break
-    }
-    break
-case 'darwin':
-	imageName = 'mac_os_icon';
-    pluginName = 'flash/PepperFlashPlayer.plugin'
-    break
-case 'linux':
-	imageName = 'linux_icon';
-    pluginName = 'flash/libpepflashplayer.so'
-    break
+	case 'win32':
+		imageName = 'windows_icon';
+		switch (process.arch) {
+			case 'ia32':
+				pluginName = 'flash/windows/32/pepflashplayer.dll'
+				break
+			case 'x32':
+				pluginName = 'flash/windows/32/pepflashplayer.dll'
+				break
+			case 'x64':
+				pluginName = 'flash/windows/64/pepflashplayer.dll'
+				break
+			}
+		break
+	case 'linux':
+		imageName = 'linux_icon';
+		switch (process.arch) {
+			case 'ia32':
+				pluginName = 'flash/linux/32/libpepflashplayer.so'
+				break
+			case 'x32':
+				pluginName = 'flash/linux/32/libpepflashplayer.so'
+				break
+			case 'x64':
+				pluginName = 'flash/linux/64/libpepflashplayer.so'
+				break
+			}
+		break
+	case 'darwin':
+		imageName = 'mac_os_icon';
+		pluginName = 'flash/PepperFlashPlayer.plugin'
+		break
 }
 app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName));
 
@@ -62,7 +72,6 @@ function createWindow() {
     makeMenu();
     ipcMain.on('load:data', (event, mute, theme) => {
         muted = (mute == 'true');
-		console.log(muted, typeof(muted))
         nativeTheme.themeSource = theme;
         win.webContents.audioMuted = muted;
     });
@@ -99,7 +108,7 @@ function activateRPC() {
   rpc.login({ clientId }).catch();
 }
 
-function makeMenu() { // credits to random
+function makeMenu() { 
     fsmenu = new Menu();
     if (process.platform == 'darwin') {
         fsmenu.append(new MenuItem({
@@ -162,7 +171,6 @@ function makeMenu() { // credits to random
             accelerator: 'CmdOrCtrl+F',
             click: () => {
                 win.setFullScreen(!win.isFullScreen());
-                win.webContents.send('fullscreen', win.isFullScreen());
             }
         }));
         fsmenu.append(new MenuItem({
