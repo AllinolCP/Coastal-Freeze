@@ -49,7 +49,7 @@ switch (process.platform) {
 		break
 	case 'darwin':
 		imageName = 'mac_os_icon';
-		pluginName = 'flash/PepperFlashPlayer.plugin'
+		pluginName = 'flash/mac/PepperFlashPlayer.plugin'
 		break
 }
 app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName));
