@@ -52,6 +52,7 @@ switch (process.platform) {
 		pluginName = 'flash/mac/PepperFlashPlayer.plugin'
 		break
 }
+app.commandLine.appendSwitch('no-sandbox'); // linux fix
 app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName));
 
 var win
