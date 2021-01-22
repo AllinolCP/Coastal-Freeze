@@ -254,6 +254,8 @@ autoUpdater.on('update-available', (updateInfo) => {
 	}
 });
 
+var updateAv = false;
+
 autoUpdater.on('update-downloaded', () => {
     updateAv = true;
 });
