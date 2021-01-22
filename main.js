@@ -5,7 +5,8 @@ const {
     Menu,
     MenuItem,
     ipcMain,
-    nativeTheme
+    nativeTheme, 
+	globalShortcut
 } = require('electron')
 
 const DiscordRPC = require('discord-rpc');
@@ -58,6 +59,9 @@ app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName
 var win
 app.on('ready', () => {
     createWindow();
+	globalShortcut.register('CmdOrCtrl+Shift+I', () => {
+		win.webContents.openDevTools();
+	})
 })
 
 //window creation function

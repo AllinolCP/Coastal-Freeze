@@ -26,7 +26,7 @@
 			"asar": false,
 			"target": "dmg",
 			"category": "public.app-category.games",
-			"icon": "icons/mac_os_icon.icns"
+			"icon": "icons/macOS/mac_os_icon.icns"
 		},
 		"dmg": {
 			"background": "background/macos_bg.png"
@@ -46,9 +46,16 @@
 						"x64",
 						"ia32"
 					]
+				},
+				{
+					"target": "snap",
+					"arch": [
+						"x64",
+						"ia32"
+					]
 				}
 			],
-			"icon": "icons/linux_icon.png"
+			"icon": "icons/linux/"
 		},
 		"win": {
 			"asar": false,
@@ -59,7 +66,7 @@
 					"ia32"
 				]
 			}],
-			"icon": "icons/windows_icon.png"
+			"icon": "icons/windows/icon.ico"
 		}
 	},
 	"author": "Coastal Freeze <support@coastalfreeze.net> (https://coastalfreeze.net)",
