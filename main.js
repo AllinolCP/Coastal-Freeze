@@ -135,6 +135,7 @@ function makeMenu() {
                 },
                 {
                     label: 'Mute Audio (Toggle)',
+					accelerator: 'CmdOrCtrl+M',
                     click: () => {
                         win.webContents.audioMuted = !win.webContents.audioMuted;
                         win.webContents.send('muted', win.webContents.audioMuted);
@@ -176,6 +177,7 @@ function makeMenu() {
         }));
         fsmenu.append(new MenuItem({
             label: 'Mute Audio (Toggle)',
+			accelerator: 'CmdOrCtrl+M',
             click: () => {
                 win.webContents.audioMuted = !win.webContents.audioMuted;
                 win.webContents.send('muted', win.webContents.audioMuted);
@@ -216,32 +218,54 @@ function darkMode() {
 
 // end of menubar
 
-// Auto update part
+
+//Auto update part
 
 autoUpdater.on('update-available', (updateInfo) => {
-    win.webContents.send('update_available', updateInfo.version);
+	switch (process.platform) {
+	case 'win32':
+	    dialog.showMessageBox({
+		  type: "info",
+		  buttons: ["Ok"],
+		  title: "Update Available",
+		  message: "There is a new version available (v" + updateInfo.version + "). It will be installed when the app closes."
+	    });
+	    break
+	case 'darwin':
+	    dialog.showMessageBox({
+		  type: "info",
+		  buttons: ["Ok"],
+		  title: "Update Available",
+		  message: "There is a new version available (v" + updateInfo.version + "). Please go install it manually from the website."
+	    });
+	    break
+	case 'linux':
+	    dialog.showMessageBox({
+		  type: "info",
+		  buttons: ["Ok"],
+		  title: "Update Available",
+		  message: "There is a new version available (v" + updateInfo.version + "). Auto-update has not been tested on this OS, so if after relaunching app this appears again, please go install it manually."
+	    });
+	    break
+	}
 });
 
 autoUpdater.on('update-downloaded', () => {
-    win.webContents.send('update-downloaded');
+    updateAv = true;
 });
 
-ipcMain.on('app_version', (event) => {
-    event.sender.send('app_version', {
-        version: app.getVersion()
-    });
-});
-
-ipcMain.on('restart_app', () => {
-    autoUpdater.quitAndInstall();
-});
-
-// end of Auto update part
+// end of Auto update part*/
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
+	if (updateAv) {
+		autoUpdater.quitAndInstall();
+	}
+	else
+	{
+		if (process.platform !== 'darwin') {
+			app.quit();
+		}
+	}
 });
 
 app.on('activate', () => {
