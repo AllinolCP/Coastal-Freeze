@@ -59,9 +59,6 @@ app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName
 var win
 app.on('ready', () => {
     createWindow();
-	globalShortcut.register('CmdOrCtrl+Shift+I', () => {
-		win.webContents.openDevTools();
-	})
 })
 
 //window creation function
@@ -85,6 +82,10 @@ function createWindow() {
     win.loadURL('https://play.coastalfreeze.net/client/');
     autoUpdater.checkForUpdatesAndNotify();
     Menu.setApplicationMenu(fsmenu);
+	
+	globalShortcut.register('CmdOrCtrl+Shift+I', () => {
+		win.webContents.openDevTools();
+	})
 	
     win.on('closed', () => {
     	win = null;
