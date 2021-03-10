@@ -31,6 +31,10 @@ jobs:
           # Log in to Snap Store
            snapcraft_token: ${{ secrets.snapcraft_token }}
 
+      - name: Install Multipass
+        if: startsWith(matrix.os, 'ubuntu')
+        run: sudo snap install multipass
+
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1.6.0
         with:
