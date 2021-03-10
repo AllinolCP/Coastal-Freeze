@@ -1,3 +1,25 @@
+/* 
+
+    Coastal Freeze's Downloadable Client
+    Copyright (C) 2021 Allinol<coastalfreeze.net>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+	
+*/
+
+
+
 const {
     app,
     dialog,
@@ -55,6 +77,7 @@ switch (process.platform) {
 }
 app.commandLine.appendSwitch('no-sandbox'); // linux fix
 app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName));
+app.commandLine.appendSwitch("disable-http-cache");
 
 var win
 app.on('ready', () => {
@@ -69,7 +92,8 @@ function createWindow() {
     webPreferences: {
         plugins: true,
         nodeIntegration: true
-    }
+    },
+	show: false
     });
     makeMenu();
     ipcMain.on('load:data', (event, mute, theme) => {
@@ -79,13 +103,27 @@ function createWindow() {
     });
     activateRPC();
 	
-    win.loadURL('https://play.coastalfreeze.net/client/');
+    let loading = new BrowserWindow({show: false, frame: false})
+
+    loading.once('show', () => {
+		win.webContents.once('dom-ready', () => {
+		  console.log('main loaded')
+		  win.show()
+		  loading.hide()
+		  loading.close()
+		})
+		win.loadURL('https://play.coastalfreeze.net/client/');
+	})
+	
     autoUpdater.checkForUpdatesAndNotify();
     Menu.setApplicationMenu(fsmenu);
 	
 	globalShortcut.register('CmdOrCtrl+Shift+I', () => {
 		win.webContents.openDevTools();
 	})
+	
+    loading.loadURL('loading.html')
+    loading.show()
 	
     win.on('closed', () => {
     	win = null;
