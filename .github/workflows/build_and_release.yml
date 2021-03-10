@@ -5,9 +5,10 @@ on:
   push:
     tags:
     - '*'
-    
+
 env:
   NODE_OPTIONS: '--max_old_space_size=4096'
+  DEBUG: 'electron-builder'
   
 jobs:
   release:
@@ -15,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-11.0, ubuntu-latest, windows-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
       - name: Check out Git repository
