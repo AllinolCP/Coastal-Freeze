@@ -121,7 +121,7 @@
 	"author": "Coastal Freeze <support@coastalfreeze.net> (https://coastalfreeze.net)",
 	"license": "CC0-1.0",
 	"devDependencies": {
-		"electron": "^8.1.1",
+		"electron": "^11.1.1",
 		"electron-builder": "^22.10.5"
 	},
 	"dependencies": {
