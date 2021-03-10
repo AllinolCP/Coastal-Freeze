@@ -1,0 +1,45 @@
+<!-- Coastal Freeze's Downloadable Client -->
+<!-- Copyright (C) 2021 Allinol<coastalfreeze.net> -->
+
+<!-- This program is free software: you can redistribute it and/or modify -->
+<!-- it under the terms of the GNU General Public License as published by -->
+<!-- the Free Software Foundation, either version 3 of the License, or -->
+<!-- (at your option) any later version. -->
+
+<!-- This program is distributed in the hope that it will be useful, -->
+<!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+<!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+<!-- GNU General Public License for more details. -->
+
+<!-- You should have received a copy of the GNU General Public License -->
+<!-- along with this program.  If not, see <https://www.gnu.org/licenses/>. -->
+
+<style>
+@media (prefers-color-scheme: dark) {
+  body { background:  #333; color: white; }
+}
+
+@media (prefers-color-scheme: light) {
+  body { background:  #ffffff; color: black; }
+  }
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+.center {
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 50%;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+<body>
+	<div class="loader center"></div>
+</body>
