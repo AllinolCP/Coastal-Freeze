@@ -97,7 +97,8 @@ function createWindow () {
     title: "Coastal Freeze",
     webPreferences: {
       plugins: true,
-      nodeIntegration: true
+      nodeIntegration: true,
+	  webSecurity: false
     }
   })
   registerKeys()
