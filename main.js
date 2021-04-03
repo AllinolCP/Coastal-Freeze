@@ -268,7 +268,7 @@ function activateRPC() {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createLoadingScreen()
-  
+  autoUpdater.checkForUpdatesAndNotify();
   app.on('activate', () => {
     // On macOS it's common to re-create a mainWindow in the app when the
     // dock icon is clicked and there are no other windows open.
