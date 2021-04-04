@@ -37,9 +37,8 @@ Owners of Coastal Freeze: Fliberjig1 and Snickerdoodle`;
 
 
 /**
- * This switch case will return the correct DLL for the app
+ * This switch case will return the correct DLL/so/plugin for the app
  */
-
 let pluginName
 switch (process.platform) {
 	case 'win32':
@@ -81,7 +80,6 @@ app.commandLine.appendSwitch("disable-http-cache");
  * Activates Discord Rich Presence
  * @returns {void}
  */
-
 let rpc;
 function activateRPC() { 
   DiscordRPC.register('792072685790167070');
@@ -101,12 +99,10 @@ function activateRPC() {
 	clientId: '792072685790167070' 
   }).catch(console.error);
 }
-
 /**
  * creates the loading screen
  * @returns {void}
  */
-
 let loadingScreen;
 function createLoadingScreen(){
   /// create a browser mainWindow
@@ -136,12 +132,10 @@ function createLoadingScreen(){
 	})
   });
 };
-
 /**
  * Creates the Menu Bar
  * @returns {Menu}
  */
-
 function createMenu() { 
     fsmenu = new Menu();
     if (process.platform == 'darwin') {
@@ -226,12 +220,10 @@ function createMenu() {
     }
 	return fsmenu
 }
-
 /**
  * creates MainWindow
  * @returns {void}
  */
-
 let mainWindow;
 function createWindow () {
   // Create the browser mainWindow.
@@ -250,27 +242,19 @@ function createWindow () {
   mainWindow.loadURL('https://play.coastalfreeze.net/client/');
   
 }
-
-
 /**
  * Registers the Shortcuts
  * @returns {void}
  */
-
-
 function registerKeys() {
 	globalShortcut.register('CmdOrCtrl+Shift+I', () => {
 		mainWindow.webContents.openDevTools();
 	})
 }
-
-
-
 /**
  * Toggles Dark mode
  * @returns {Boolean}
  */
-
 function darkMode() {
 	nativeTheme.themeSource = nativeTheme.shouldUseDarkColors ? 'dark' : 'light'
     mainWindow.webContents.send('theme', nativeTheme.themeSource);
