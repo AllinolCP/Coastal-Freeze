@@ -22,8 +22,8 @@
 
 
 /**
- * modules for the app
-*/
+ * Modules and variables
+ */
 const {app, dialog, BrowserWindow, Menu, MenuItem, ipcMain, nativeTheme, globalShortcut, session} = require('electron')
 const path = require('path')
 
@@ -31,7 +31,14 @@ const {autoUpdater} = require("electron-updater");
 
 const DiscordRPC = require('discord-rpc');
 
+const aboutMessage = `Coastal Freeze Client v${app.getVersion()}
+Created by Allinol and Random for use with Coastal Freeze.
+Owners of Coastal Freeze: Fliberjig1 and Snickerdoodle`;
 
+
+/**
+ * This switch case will return the correct DLL for the app
+ */
 
 let pluginName
 switch (process.platform) {
@@ -71,44 +78,33 @@ app.commandLine.appendSwitch("disable-http-cache");
 
 
 /**
- * Loads settings from the page
- * @param {event}
- * @param {String}
- * @param {String}
+ * Activates Discord Rich Presence
  * @returns {void}
  */
 
-ipcMain.on('load:data', (event, mute, theme) => {
-	muted = (mute === 'true');
-	nativeTheme.themeSource = theme;
-	mainWindow.webContents.audioMuted = muted;
-});
-
-/**
- * Creates the mainWindow for the app
- */
-
-let mainWindow;
-function createWindow () {
-  // Create the browser mainWindow.
-  mainWindow = new BrowserWindow({
-    useContentSize: true,
-    show: false,
-    title: "Coastal Freeze",
-    webPreferences: {
-      plugins: true,
-      nodeIntegration: true,
-	  webSecurity: false
-    }
-  })
-  registerKeys()
-  Menu.setApplicationMenu(createMenu());
-  mainWindow.loadURL('https://play.coastalfreeze.net/client/');
-  
+let rpc;
+function activateRPC() { 
+  DiscordRPC.register('792072685790167070');
+  rpc = new DiscordRPC.Client({
+	  transport: 'ipc'
+  }); 
+  const startTimestamp = new Date();
+  rpc.on('ready', () => {
+    rpc.setActivity({
+      details: `coastalfreeze.net`, 
+      state: `Desktop Client`, 
+      startTimestamp, 
+      largeImageKey: imageName
+    });
+  });
+  rpc.login({
+	clientId: '792072685790167070' 
+  }).catch(console.error);
 }
 
 /**
- * Creates the loading screen for the app
+ * creates the loading screen
+ * @returns {void}
  */
 
 let loadingScreen;
@@ -141,21 +137,14 @@ function createLoadingScreen(){
   });
 };
 
-
-const aboutMessage = `Coastal Freeze Client v${app.getVersion()}
-Created by Allinol and Random for use with Coastal Freeze.
-Owners of Coastal Freeze: Fliberjig1 and Snickerdoodle`;
-
-
-function registerKeys() {
-	globalShortcut.register('CmdOrCtrl+Shift+I', () => {
-		mainWindow.webContents.openDevTools();
-	})
-}
+/**
+ * Creates the Menu Bar
+ * @returns {Menu}
+ */
 
 function createMenu() { 
     fsmenu = new Menu();
-    if (process.platform == 'darmainWindow') {
+    if (process.platform == 'darwin') {
         fsmenu.append(new MenuItem({
             label: "Coastal Freeze Client",
             submenu: [{
@@ -193,9 +182,7 @@ function createMenu() {
                 },
                 {
                     label: 'Log Out',
-					click: async () => {
-						await clearCache();
-					}
+					click: () => createLoadingScreen()
                 }
             ]
         }));
@@ -234,60 +221,55 @@ function createMenu() {
         }));
         fsmenu.append(new MenuItem({
             label: 'Log Out',
-            click: async () => {
-                await clearCache();
-            }
+            click: () => createLoadingScreen()
         }));
     }
 	return fsmenu
 }
-async function clearCache() {
-    const ses = mainWindow.webContents.session;
-	await ses.clearCache()
-	mainWindow.reload()
-}
 
-let rpc;
-function activateRPC() { 
-  DiscordRPC.register('792072685790167070');
-  rpc = new DiscordRPC.Client({ transport: 'ipc' }); 
-  const startTimestamp = new Date();
-  rpc.on('ready', () => {
-    rpc.setActivity({
-      details: `coastalfreeze.net`, 
-      state: `Desktop Client`, 
-      startTimestamp, 
-      largeImageKey: imageName
-    });
-  });
-  rpc.login('792072685790167070').catch(console.error);
-}
+/**
+ * creates MainWindow
+ * @returns {void}
+ */
 
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser Windows.
-// Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
-  createLoadingScreen()
-  autoUpdater.checkForUpdatesAndNotify();
-  app.on('activate', () => {
-    // On macOS it's common to re-create a mainWindow in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createLoadingScreen()
+let mainWindow;
+function createWindow () {
+  // Create the browser mainWindow.
+  mainWindow = new BrowserWindow({
+    useContentSize: true,
+    show: false,
+    title: "Coastal Freeze",
+    webPreferences: {
+      plugins: true,
+      nodeIntegration: true,
+	  webSecurity: false
+    }
   })
-})
+  registerKeys()
+  Menu.setApplicationMenu(createMenu());
+  mainWindow.loadURL('https://play.coastalfreeze.net/client/');
+  
+}
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-	if(updateAv) autoUpdater.quitAndInstall();
-	if(process.platform !== 'darwin') app.quit();
-});
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+/**
+ * Registers the Shortcuts
+ * @returns {void}
+ */
 
+
+function registerKeys() {
+	globalShortcut.register('CmdOrCtrl+Shift+I', () => {
+		mainWindow.webContents.openDevTools();
+	})
+}
+
+
+
+/**
+ * Toggles Dark mode
+ * @returns {Boolean}
+ */
 
 function darkMode() {
 	nativeTheme.themeSource = nativeTheme.shouldUseDarkColors ? 'dark' : 'light'
@@ -296,8 +278,13 @@ function darkMode() {
 }
 
 /**
- * Auto Updater Part
+ * Auto Updater and Events!
  */
+ 
+/**
+* This event will fire if update is downloaded
+* @returns {void}
+*/
  
 let updateAv = false;
 autoUpdater.on('update-downloaded', () => {
@@ -305,10 +292,34 @@ autoUpdater.on('update-downloaded', () => {
 });
 
 /**
- * auto updater update available event
+ * This event will fire if electron is ready
+ * @returns {void}
+ */
+
+app.whenReady().then(() => {
+  createLoadingScreen()
+  autoUpdater.checkForUpdatesAndNotify();
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createLoadingScreen()
+  })
+})
+
+/**
+ * This event will fire if the windows are all closed
+ * @returns {void}
+ */
+
+app.on('window-all-closed', () => {
+	if(updateAv) autoUpdater.quitAndInstall();
+	if(process.platform !== 'darwin') app.quit();
+});
+
+/**
+ * This event will fire whenever an update is available
  * @param {Object}
  * @returns {void}
  */
+ 
 autoUpdater.on('update-available', (updateInfo) => {
 	switch (process.platform) {
 	case 'win32':
@@ -339,11 +350,22 @@ autoUpdater.on('update-available', (updateInfo) => {
 });
 
 /**
- * End of Auto Updater part
+ * This Event will fire if 'load:data' was sent from the site
+ * @param {event}
+ * @param {String}
+ * @param {String}
+ * @returns {void}
  */
 
+ipcMain.on('load:data', (event, mute, theme) => {
+	muted = (mute === 'true');
+	nativeTheme.themeSource = theme;
+	mainWindow.webContents.audioMuted = muted;
+});
 
-
+/**
+ * End of Auto Updater part
+ */
 
 
 
