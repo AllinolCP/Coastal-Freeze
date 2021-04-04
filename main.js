@@ -232,8 +232,9 @@ function createWindow () {
     show: false,
     title: "Coastal Freeze",
     webPreferences: {
+	  preload: path.join(__dirname, './preload.js'),
       plugins: true,
-      nodeIntegration: true,
+      nodeIntegration: false,
 	  webSecurity: false
     }
   })
@@ -342,9 +343,14 @@ autoUpdater.on('update-available', (updateInfo) => {
  */
 
 ipcMain.on('load:data', (event, mute, theme) => {
+	console.log('ooop')
+	console.log(theme)
 	muted = (mute === 'true');
 	nativeTheme.themeSource = theme;
 	mainWindow.webContents.audioMuted = muted;
+	
+	mainWindow.webContents.send('theme', nativeTheme.themeSource);
+	
 });
 
 /**
