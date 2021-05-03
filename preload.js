@@ -11,6 +11,14 @@ ipcRenderer.on('theme', (event, data) => {
 	game.setDarkMode()
 });
 
+ipcRenderer.on('reload', async (event) => {
+	const game = document.getElementById('game');
+	game.style.display = "none"
+	await sleep(3000)
+	game.style.display = "block"
+	
+});
+
 window.addEventListener('load', (event) => {
 	checkExist = setInterval(() => {
 		if(game.setDarkMode) { 
@@ -32,3 +40,7 @@ function loadSettings() {
 		game.setDarkMode()
 	}
 }
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+

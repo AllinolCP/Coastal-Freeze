@@ -176,7 +176,7 @@ function createMenu() {
                 },
                 {
                     label: 'Log Out',
-					click: () => createLoadingScreen()
+					click: () => clearCacheAndReload()
                 }
             ]
         }));
@@ -215,7 +215,7 @@ function createMenu() {
         }));
         fsmenu.append(new MenuItem({
             label: 'Log Out',
-            click: () => createLoadingScreen()
+            click: () => clearCacheAndReload()
         }));
     }
 	return fsmenu
@@ -243,6 +243,16 @@ function createWindow () {
   mainWindow.loadURL('https://play.coastalfreeze.net/client/');
   
 }
+
+/**
+ * Clears cache and reload
+ * @returns {void}
+ */
+function clearCacheAndReload() {
+	const ses = mainWindow.webContents.session;
+	ses.clearCache().then(() => mainWindow.webContents.send('reload'));
+}
+
 /**
  * Registers the Shortcuts
  * @returns {void}
@@ -343,8 +353,6 @@ autoUpdater.on('update-available', (updateInfo) => {
  */
 
 ipcMain.on('load:data', (event, mute, theme) => {
-	console.log('ooop')
-	console.log(theme)
 	muted = (mute === 'true');
 	nativeTheme.themeSource = theme;
 	mainWindow.webContents.audioMuted = muted;
