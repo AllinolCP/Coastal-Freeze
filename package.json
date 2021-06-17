@@ -1,34 +1,36 @@
 {
-	"name": "coastal-freeze",
-	"version": "1.1.2",
-	"description": "Coastal Freeze Downloadable Client",
-	"productName": "Coastal Freeze",
+	"name": "frozen-tundra",
+	"version": "1.0.0",
+	"description": "Frozen Tundra Downloadable Client",
+	"productName": "Frozen Tundra",
 	"main": "main.js",
 	"scripts": {
 		"start": "electron ."
 	},
-	"repository": "https://github.com/AllinolCP/Coastal-Freeze",
+	"repository": "https://github.com/Frozen-Tundra/client",
 	"keywords": [
 		"coastal",
 		"freeze",
 		"club penguin",
 		"cpr",
-		"coastal freeze"
+		"coastal freeze",
+		"Snowy fields",
+		"Frozen Tundra"
 	],
 	"build": {
 		"publish": [
 			{
 				"provider": "github",
-				"owner": "AllinolCP",
-				"repo": "Coastal-Freeze"
+				"owner": "Frozen-Tundra",
+				"repo": "client"
 			}
 		],
-		"appId": "net.coastalfreeze.client",
+		"appId": "me.frozentundra.client",
 		"mac": {
 			"asar": false,
 			"target": "dmg",
 			"category": "public.app-category.games",
-			"icon": "icons/macOS/mac_os_icon.icns",
+			"icon": "icons/macOS/icon.icns",
 			"files": [
 				"**/*",
 				"!**/flash/{windows, linux}",
@@ -95,7 +97,12 @@
 				{
 					"target": "nsis",
 					"arch": [
-						"x64",
+						"x64"
+					]
+				},
+				{
+					"target": "nsis",
+					"arch": [
 						"ia32"
 					]
 				}
@@ -118,7 +125,7 @@
 			"icon": "icons/windows/icon.ico"
 		}
 	},
-	"author": "Coastal Freeze <support@coastalfreeze.net> (https://coastalfreeze.net)",
+	"author": "Frozen Tundra <support@frozentundra.me> (https://frozentundra.me)",
 	"license": "CC0-1.0",
 	"devDependencies": {
 		"electron": "^11.1.1",

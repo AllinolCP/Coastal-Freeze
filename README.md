@@ -1,4 +1,4 @@
-# Coastal Freeze
+# Frozen Tundra
 
 
-Official Coastal Freeze Client
+Official Frozen Tundra Client

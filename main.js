@@ -1,8 +1,8 @@
 
 /* 
 
-    Coastal Freeze's Downloadable Client
-    Copyright (C) 2021 Allinol<coastalfreeze.net>
+    Frozen Tundra's Downloadable Client
+    Copyright (C) 2021 Allinol<frozentundra.me>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,9 +31,9 @@ const {autoUpdater} = require("electron-updater");
 
 const DiscordRPC = require('discord-rpc');
 
-const aboutMessage = `Coastal Freeze Client v${app.getVersion()}
-Created by Allinol and Random for use with Coastal Freeze.
-Owners of Coastal Freeze: Fliberjig1 and Snickerdoodle`;
+const aboutMessage = `Frozen Tundra Client v${app.getVersion()}
+Created by Allinol and Random for use with Frozen Tundra.
+Owners of Frozen Tundra: Fliberjig1 and Anvura`;
 
 
 /**
@@ -89,7 +89,7 @@ function activateRPC() {
   const startTimestamp = new Date();
   rpc.on('ready', () => {
     rpc.setActivity({
-      details: `coastalfreeze.net`, 
+      details: `frozentundra.me`, 
       state: `Desktop Client`, 
       startTimestamp, 
       largeImageKey: imageName
@@ -140,14 +140,14 @@ function createMenu() {
     fsmenu = new Menu();
     if (process.platform == 'darwin') {
         fsmenu.append(new MenuItem({
-            label: "Coastal Freeze Client",
+            label: "Frozen Tundra Client",
             submenu: [{
                     label: 'About',
                     click: () => {
                         dialog.showMessageBox({
                             type: "info",
                             buttons: ["Ok"],
-                            title: "About Coastal Freeze",
+                            title: "About Frozen Tundra",
                             message: aboutMessage
                         });
                     }
@@ -187,7 +187,7 @@ function createMenu() {
                 dialog.showMessageBox({
                     type: "info",
                     buttons: ["Ok"],
-                    title: "About Coastal Freeze",
+                    title: "About Frozen Tundra",
                     message: aboutMessage
                 });
             }
@@ -230,7 +230,7 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     useContentSize: true,
     show: false,
-    title: "Coastal Freeze",
+    title: "Frozen Tundra",
     webPreferences: {
 	  preload: path.join(__dirname, './preload.js'),
       plugins: true,
@@ -240,7 +240,7 @@ function createWindow () {
   })
   registerKeys()
   Menu.setApplicationMenu(createMenu());
-  mainWindow.loadURL('https://play.coastalfreeze.net/client/');
+  mainWindow.loadURL('https://play.frozentundra.me/client/');
   
 }
 
