@@ -1,6 +1,6 @@
 {
 	"name": "frozen-tundra",
-	"version": "2.0.0",
+	"version": "1.0.0",
 	"description": "Frozen Tundra Downloadable Client",
 	"productName": "Frozen Tundra",
 	"main": "main.js",
@@ -15,7 +15,8 @@
 		"cpr",
 		"coastal freeze",
 		"Snowy fields",
-		"Frozen Tundra"
+		"Frozen Tundra",
+		"newcp"
 	],
 	"build": {
 		"publish": [
