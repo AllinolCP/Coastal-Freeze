@@ -40,6 +40,7 @@ ipcRenderer.on('reload', async (event) => {
 });
 
 window.addEventListener('load', (event) => {
+	const game = document.getElementById('game');
 	checkExist = setInterval(() => {
 		if(game.setDarkMode) { 
 			clearInterval(checkExist)
