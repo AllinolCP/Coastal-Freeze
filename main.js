@@ -42,7 +42,6 @@ Owners of Frozen Tundra: Fliberjig1 and Anvura`;
 let pluginName
 switch (process.platform) {
 	case 'win32':
-		imageName = 'windows_icon';
 		switch (process.arch) {
 			case 'ia32':
 			case 'x32':
@@ -54,7 +53,6 @@ switch (process.platform) {
 			}
 		break
 	case 'linux':
-		imageName = 'linux_icon';
 		switch (process.arch) {
 			case 'ia32':
 			case 'x32':
@@ -68,7 +66,6 @@ switch (process.platform) {
 		app.commandLine.appendSwitch('no-sandbox');
 		break
 	case 'darwin':
-		imageName = 'mac_os_icon';
 		pluginName = 'flash/mac/PepperFlashPlayer.plugin'
 		break
 }
@@ -92,7 +89,7 @@ function activateRPC() {
       details: `frozentundra.me`, 
       state: `Desktop Client`, 
       startTimestamp, 
-      largeImageKey: imageName
+      largeImageKey: 'icon'
     });
   });
   rpc.login({
