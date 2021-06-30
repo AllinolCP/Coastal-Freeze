@@ -3,8 +3,6 @@ name: Build/release
 on:
   workflow_dispatch:
   push:
-    tags:
-    - '*'
 
 env:
   NODE_OPTIONS: '--max_old_space_size=4096'
